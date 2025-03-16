@@ -1,0 +1,12 @@
+@import 'assets/scss/Variables.scss';
+@import 'assets/scss/Extends.scss';
+
+.navbar-links {
+	.MuiTab-labelIcon {
+		text-transform: capitalize;
+	}
+}
+.app-body-container {
+	padding: toRem(50);
+	padding-top: toRem(25);
+}

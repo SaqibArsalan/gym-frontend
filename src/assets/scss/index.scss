@@ -1,0 +1,59 @@
+@import './Variables.scss';
+@import './Extends.scss';
+@import './Common.scss';
+@import './Forms.scss';
+
+html,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+table,
+li,
+label,
+span,
+legend {
+	font-family: $bazaar-regular;
+	margin: 0;
+}
+
+// by default setting for rem
+html {
+	font-size: 16px;
+}
+$fontPath: "/assets/fonts/";
+
+@font-face {
+	font-family: 'bazaar-regular';
+	src: url($fontPath + 'inter-regular-webfont.woff2') format('woff2'),
+		url($fontPath + 'inter-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'bazaar-medium';
+	src: url($fontPath + 'inter-medium-webfont.woff2') format('woff2'),
+		url($fontPath + 'inter-medium-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'playfair_displayblack';
+	src: url($fontPath + 'playfairdisplay-black-webfont.woff2') format('woff2'),
+		url($fontPath + 'playfairdisplay-black-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'playfair_displayregular';
+	src: url($fontPath + 'playfairdisplay-regular-webfont.woff2') format('woff2'),
+		url($fontPath + 'playfairdisplay-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}

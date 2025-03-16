@@ -1,0 +1,14 @@
+/tools
+.gitignore
+/configs
+/node_modules
+/build
+/coverage
+/.husky
+/.git
+package.json
+tsconfig.json
+webpack.dev.config.ts
+webpack.prod.config.ts
+webpack.dev-micro.config.ts
+/server

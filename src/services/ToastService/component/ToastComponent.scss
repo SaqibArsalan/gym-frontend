@@ -1,0 +1,10 @@
+@import 'assets/scss/Variables.scss';
+@import 'assets/scss/Extends.scss';
+
+.toast-wrapper {
+	div,
+	svg,
+	button {
+		color: white !important;
+	}
+}

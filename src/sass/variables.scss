@@ -1,0 +1,27 @@
+// Variables
+$nucleus-black: #131111;
+$nucleus-white: #e0e0e0;
+$nucleus-red: #ff2323;
+$nucleus-green: #005f20;
+$nucleus-blue: #070bce;
+$nucleus-paper-border: #e6edf0;
+$nucleus-fully-loaded: #04bfa5;
+$nucleus-partial-loaded: #ff8a00;
+$nucleus-in-progress: #4990ff;
+$nucleus-unloaded-unreceived: #e6edf0;
+$nucleus-button-default: #4990ff;
+$nucleus-subheading: #69767b;
+$nucleus-heading: #161a24;
+$nucleus-border: #e9e9e9;
+
+:root {
+	--background: #fff;
+	--font-color: #494949;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #3c3c3c;
+		--font-color: #fafafa;
+	}
+}

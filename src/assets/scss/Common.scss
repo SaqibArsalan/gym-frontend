@@ -1,0 +1,23 @@
+@import './Variables.scss';
+
+.control-tower-module-app {
+	background-color: $lightgrey;
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.common-container-padding {
+	padding: toRem(32) toRem(40);
+}
+.mb-3{
+	margin-bottom: toRem(24);
+}

@@ -1,0 +1,61 @@
+{
+	"env": {
+		"browser": true,
+		"commonjs": true,
+		"es2021": true,
+		"jest/globals": true
+	},
+	"extends": ["plugin:react/recommended", "airbnb", "prettier"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12
+	},
+	"plugins": ["react", "@typescript-eslint", "jest"],
+	"overrides": [
+		{
+			"files": ["src/**/*.{ts,js,jsx,tsx}"]
+		}
+	],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".js", ".jsx", ".ts", ".tsx"],
+				"moduleDirectory": ["node_modules", "src/"]
+			}
+		}
+	},
+	"rules": {
+		"react/jsx-filename-extension": [
+			1,
+			{ "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+		],
+		"no-use-before-define": "off",
+		"@typescript-eslint/no-use-before-define": ["error"],
+		"import/no-extraneous-dependencies": "off",
+		"import/extensions": [
+			"error",
+			"always",
+			{
+				"js": "never",
+				"jsx": "never",
+				"ts": "never",
+				"tsx": "never"
+			}
+		],
+		"jest/no-disabled-tests": "warn",
+		"jest/no-focused-tests": "error",
+		"jest/no-identical-title": "error",
+		"jest/prefer-to-have-length": "warn",
+		"jest/valid-expect": "error",
+		"import/prefer-default-export": "off",
+		"no-param-reassign": "off",
+		"react/jsx-props-no-spreading": "off",
+		"react/no-array-index-key": "off",
+		"no-unused-vars": "off",
+		"no-shadow": "off",
+		"react/state-in-constructor": "off"
+	}
+}
