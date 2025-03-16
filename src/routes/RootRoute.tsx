@@ -16,6 +16,7 @@ import {
 } from './Routes.helper';
 import LoginPage from "../components/pages/LoginPage/LoginPage";
 import RegisterPage from "../components/pages/RegistrationPage/RegistrationPage";
+import MainPage from "../components/pages/MainPage/MainPage";
 
 // const isMicroBuild = Boolean(process.env.MICRO_BUILD);
 
@@ -29,18 +30,9 @@ const RootRoute = (props: { store: Store; mainTheme?: Theme }) => {
 	return (
 		<Router>
 			<Routes>
-				<Route path={ROUTES.ROOT} element={<LoginPage />} />
+				<Route path={ROUTES.ROOT} element={<MainPage />} />
 				<Route path='/register' element={<RegisterPage />} />
 				<Route path="/login" element={<LoginPage />} />
-					<Route
-						index
-						element={
-							<Navigate
-								replace
-								to={`${ROUTES.TOURS}`}
-							/>
-						}
-					/>
 					<Route
 						path='*'
 						element={

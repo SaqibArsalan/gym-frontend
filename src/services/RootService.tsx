@@ -7,7 +7,6 @@ import NavigationRoot from './NavigationService/component/NavigationRoot';
 const RootService = () => (
 	<>
 		<ModalRoot />
-		<ToastRoot />
 		<LoaderRoot />
 		<NavigationRoot />
 	</>

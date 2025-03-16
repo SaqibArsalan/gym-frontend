@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import './MainPage.css';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {login, logout} from "redux/components/Auth/sources"; // Custom CSS for styling
-import {Outlet} from "@mui/icons-material";
-import MainAppConnector from "./MainPageConnector";
+import { Box } from "@mui/material";
+import styles from "./MainLayout.module.scss";
 import {IHEADER_LINKS_INFO, IMainPage} from "./MainPage.interface";
-import RootService from "../../../services/RootService";
 import {filterModuleWrtRoles, getActiveModuleIndex} from "./MainPage.helpers";
 import {LinkTab} from "../../shared/LinkTab";
+import Sidebar from "../../shared/SideBar/SideBar";
+import Navbar from "../../shared/NavBar";
+import MainAppConnector from "./MainPageConnector";
+import DashboardPage from "../DashboardPage/Dashboard";
 
 const MainPageComponent: React.FunctionComponent<IMainPage> = (
 	props: IMainPage
@@ -42,12 +44,15 @@ const MainPageComponent: React.FunctionComponent<IMainPage> = (
 		});
 
 	return (
-		<>
-			<div className='app-body-container'>
-				<Outlet />
-			</div>
-			<RootService />
-		</>
+		<Box className={styles.layout} sx={{ display: "flex" }}>
+			<Sidebar />
+			<Box className={styles.mainContent} sx={{ flexGrow: 1 }}>
+				<Navbar />
+				<Box className={styles.pageContent} sx={{ p: 3 }}>
+					<DashboardPage />
+				</Box>
+			</Box>
+		</Box>
 	);
 };
 

@@ -1,50 +1,16 @@
-// Generated with util/create-component.js
-import React, { useState } from 'react';
-import { Tabs } from '@mui/material';
-import styled from '@emotion/styled';
+import React from "react";
+import { Notifications, AccountCircle, ExitToApp } from "@mui/icons-material";
+import styles from "./Navbar.module.scss";
 
-import { INavBarProps } from './NavBar.types';
-
-import './NavBar.scss';
-
-const CustomizedTabs = styled(Tabs)(() => ({
-	'.MuiTabs-indicator': {
-		display: 'none',
-	},
-}));
-
-const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
-	const [tabValue, setValue] = useState(props.value != null ? props.value : 0);
-
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue);
-	};
-
-	return props.removeBorderBottom ? (
-		<CustomizedTabs
-			{...props}
-			value={props.value != null ? props.value : tabValue}
-			onChange={props.onChange || handleChange}
-			aria-label='nav tabs example'
-		>
-			{props.children}
-		</CustomizedTabs>
-	) : (
-		<Tabs
-			{...props}
-			value={props.value != null ? props.value : tabValue}
-			onChange={props.onChange || handleChange}
-			aria-label='nav tabs example'
-		>
-			{props.children}
-		</Tabs>
+const Navbar: React.FC = () => (
+		<nav className={styles.navbar}>
+			<div className={styles.logo}>Gym Management</div>
+			<div className={styles.navIcons}>
+				<Notifications className={styles.icon} />
+				<AccountCircle className={styles.icon} />
+				<ExitToApp className={styles.icon} />
+			</div>
+		</nav>
 	);
-};
 
-NavBar.defaultProps = {
-	removeBorderBottom: false,
-	value: null,
-	onChange: undefined,
-};
-
-export default NavBar;
+export default Navbar;
