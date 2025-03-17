@@ -10,17 +10,15 @@ import {LinkTab} from "../../shared/LinkTab";
 import Sidebar from "../../shared/SideBar/SideBar";
 import Navbar from "../../shared/NavBar";
 import MainAppConnector from "./MainPageConnector";
-import DashboardPage from "../DashboardPage/Dashboard";
+import DashboardPage from "../DashboardPage/DashboardPage";
 
-const MainPageComponent: React.FunctionComponent<IMainPage> = (
-	props: IMainPage
-) => {
-	const { auth } = props;
-	const { userInfo, roles } = auth;
+const MainPageComponent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+	// const { auth } = props;
+	// const { userInfo, roles } = auth;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const location = useLocation();
-	const allowedModules: IHEADER_LINKS_INFO[] = filterModuleWrtRoles(roles);
+	const allowedModules: IHEADER_LINKS_INFO[] = filterModuleWrtRoles([]);
 	const activeModuleIndex: number = getActiveModuleIndex(
 		location && location.pathname,
 		allowedModules

@@ -15,8 +15,9 @@ import {
     Settings,
     ExpandLess,
     ExpandMore,
-    Logout,
+    Logout, Group, FitnessCenter, CardMembership, Payment,
 } from "@mui/icons-material";
+import {Link} from "react-router-dom";
 import styles from "./SideBar.module.scss";
 
 const Sidebar: React.FC = () => {
@@ -34,25 +35,38 @@ const Sidebar: React.FC = () => {
         >
             <Box sx={{ mt: 2 }}>
                 <List>
-                    {/* Dashboard */}
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <Dashboard />
-                            </ListItemIcon>
-                            <ListItemText primary="Dashboard" />
-                        </ListItemButton>
-                    </ListItem>
+                    {/* DashboardPage */}
+                    <ListItemButton component={Link} to="/dashboard">
+                        <ListItemIcon><Dashboard /></ListItemIcon>
+                        <ListItemText primary="DashboardPage" />
+                    </ListItemButton>
 
-                    {/* Users */}
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <People />
-                            </ListItemIcon>
-                            <ListItemText primary="Users" />
-                        </ListItemButton>
-                    </ListItem>
+                    <ListItemButton component={Link} to="/members">
+                        <ListItemIcon><People /></ListItemIcon>
+                        <ListItemText primary="Members" />
+                    </ListItemButton>
+
+
+                    <ListItemButton component={Link} to="/staff">
+                        <ListItemIcon><Group /></ListItemIcon>
+                        <ListItemText primary="Staff" />
+                    </ListItemButton>
+
+                    <ListItemButton component={Link} to="/classes">
+                        <ListItemIcon><FitnessCenter /></ListItemIcon>
+                        <ListItemText primary="Classes" />
+                    </ListItemButton>
+
+                    {/* ✅ Memberships Added Here */}
+                    <ListItemButton component={Link} to="/memberships">
+                        <ListItemIcon><CardMembership /></ListItemIcon>
+                        <ListItemText primary="Memberships" />
+                    </ListItemButton>
+
+                    <ListItemButton component={Link} to="/payments">
+                        <ListItemIcon><Payment /></ListItemIcon>
+                        <ListItemText primary="Payments" />
+                    </ListItemButton>
 
                     {/* Settings (Collapsible) */}
                     <ListItem disablePadding>

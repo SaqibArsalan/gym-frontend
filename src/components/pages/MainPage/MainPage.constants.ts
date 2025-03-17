@@ -15,7 +15,7 @@ export const HEADER_LINKS_INFO: IHEADER_LINKS_INFO[] = [
 		label: 'Control Tower',
 		default: true,
 		icon: ShoppingCartIcon,
-		route: prepareRouteForNavigation(ROUTES.TOURS),
+		route: prepareRouteForNavigation(ROUTES.DASHBOARD),
 		isReplaceRoute: false,
 		onClick: linkNavigationHandler,
 	},

@@ -2,9 +2,11 @@ import { IReduxAction } from 'redux/interfaces';
 
 export interface IMiscellaneousInitialState {
 	warehouses: IWarehouse[];
+	activeMembersCount: number;
 }
 export interface IMiscellaneousActions {
 	fetchWarehousesSuccess: IReduxAction<IWarehouse[]>;
+	fetchActiveMembersCountSuccess: IReduxAction<Number>;
 }
 
 export interface IWarehouse {

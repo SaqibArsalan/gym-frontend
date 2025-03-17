@@ -46,24 +46,24 @@ describe('fetchWarehouseData Tests', () => {
 		);
 
 		const fetchWarehouseListMock = jest
-			.spyOn(sources, 'fetchWarehouseList')
-			.mockReturnValue(Promise.resolve([]));
+			.spyOn(sources, 'fetchMembersCount')
+			.mockReturnValue(Promise.resolve(0));
 
-		sources.fetchWarehouseData()(dispatchMock);
+		sources.fetchActiveMembersCount()(dispatchMock);
 		await Promise.all([fetchWarehouseListMock.mock.results[0].value]);
 		expect(fetchWarehousesSuccessMock).toBeCalled();
 	});
 	it('fetchWarehouseData fail flow', done => {
 		const fetchWarehouseListMock = jest
-			.spyOn(sources, 'fetchWarehouseList')
-			.mockReturnValue(
-				// eslint-disable-next-line prefer-promise-reject-errors
-				Promise.reject({
-					statusText: 'testing',
-				})
-			);
+			.spyOn(sources, 'fetchActiveMembersCount')
+			// .mockReturnValue(
+			// 	// eslint-disable-next-line prefer-promise-reject-errors
+			// 	Promise.reject({
+			// 		statusText: 'testing',
+			// 	})
+			// );
 
-		sources.fetchWarehouseData()(dispatchMock);
+		sources.fetchActiveMembersCount()(dispatchMock);
 		Promise.all([fetchWarehouseListMock.mock.results[0].value]).catch(() => {
 			expect(errorToastMock).toBeCalled();
 			done();

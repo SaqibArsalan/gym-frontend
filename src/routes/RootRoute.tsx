@@ -31,6 +31,7 @@ const RootRoute = (props: { store: Store; mainTheme?: Theme }) => {
 		<Router>
 			<Routes>
 				<Route path={ROUTES.ROOT} element={<MainPage />} />
+				<Route path={ROUTES.DASHBOARD} element={<MainPage />} />
 				<Route path='/register' element={<RegisterPage />} />
 				<Route path="/login" element={<LoginPage />} />
 					<Route

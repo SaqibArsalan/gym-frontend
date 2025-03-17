@@ -7,10 +7,11 @@ import { IChildModuleInfo } from './interface';
 
 const ROUTES = {
 	ROOT: '/',
-	TOURS: '/tours',
-	ORDERS: '/orders',
-	COLLECTIONS: '/collections',
-	MODULE_ROOT: '/control-tower',
+	DASHBOARD: '/dashboard',
+	MEMBERS: '/members',
+	MEMBERSHIPS: '/memberships',
+	STAFF: '/staff',
+	MODULE_ROOT: '/',
 };
 
 export const CHILD_MODULES_INFO: { [key: string]: IChildModuleInfo } = {

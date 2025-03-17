@@ -14,3 +14,14 @@ export const fetchWarehousesSuccess = (
 	}
 	return state;
 };
+
+export const fetchActiveMembersCountSuccess = (
+	state: IMiscellaneousInitialState,
+	action: IReduxActionResponse<number>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, activeMembersCount: payload || 0 };
+	}
+	return state;
+};
