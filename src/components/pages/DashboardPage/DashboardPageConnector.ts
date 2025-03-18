@@ -7,7 +7,9 @@ import { IRootState } from 'redux/rootReducer';
 // State to bind
 const mapStateToProps = (state: IRootState) => ({
 	auth: state.auth,
-	activeMembersCount: state.miscellaneous.activeMembersCount
+	activeMembersCount: state.miscellaneous.activeMembersCount,
+	activeSubscriptionsCount: state.miscellaneous.activeSubscriptionsCount,
+	newSignupsCount: state.miscellaneous.newSignupsCount
 });
 
 const LoginConnector = (component: React.ComponentType<any>) =>

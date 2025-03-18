@@ -5,6 +5,8 @@ import { IAuthInitialState } from 'redux/components/Auth';
 export interface IDashboardProps {
 	auth: IAuthInitialState;
 	activeMembersCount: number;
+	activeSubscriptionsCount: number;
+	newSignupsCount: number;
 	// tourNotifications: ITourNotificationResponse[];
 	// tourList: ITour[];
 }

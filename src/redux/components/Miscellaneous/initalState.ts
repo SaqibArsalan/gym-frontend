@@ -3,7 +3,9 @@ import { IMiscellaneousInitialState } from './Miscellaneous.interface';
 
 const miscellaneousInitialState: IMiscellaneousInitialState = {
 	warehouses: [],
-	activeMembersCount: 0
+	activeMembersCount: 0,
+	activeSubscriptionsCount: 0,
+	newSignupsCount: 0
 };
 
 export default miscellaneousInitialState;

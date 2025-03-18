@@ -3,10 +3,14 @@ import { IReduxAction } from 'redux/interfaces';
 export interface IMiscellaneousInitialState {
 	warehouses: IWarehouse[];
 	activeMembersCount: number;
+	activeSubscriptionsCount: number;
+	newSignupsCount: number;
 }
 export interface IMiscellaneousActions {
 	fetchWarehousesSuccess: IReduxAction<IWarehouse[]>;
-	fetchActiveMembersCountSuccess: IReduxAction<Number>;
+	fetchActiveMembersCountSuccess: IReduxAction<number>;
+	fetchActiveSubscriptionsCountSuccess: IReduxAction<number>;
+	fetchNewSignupsCountSuccess: IReduxAction<number>;
 }
 
 export interface IWarehouse {

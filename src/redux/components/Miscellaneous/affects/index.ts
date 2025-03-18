@@ -25,3 +25,25 @@ export const fetchActiveMembersCountSuccess = (
 	}
 	return state;
 };
+
+export const fetchActiveSubscriptionsCountSuccess = (
+	state: IMiscellaneousInitialState,
+	action: IReduxActionResponse<number>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, activeSubscriptionsCount: payload || 0};
+	}
+	return state;
+};
+
+export const fetchNewSignupsCountSuccess = (
+	state: IMiscellaneousInitialState,
+	action: IReduxActionResponse<number>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, newSignupsCount: payload || 0 };
+	}
+	return state;
+}
