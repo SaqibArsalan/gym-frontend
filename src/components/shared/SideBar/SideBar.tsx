@@ -35,17 +35,16 @@ const Sidebar: React.FC = () => {
         >
             <Box sx={{ mt: 2 }}>
                 <List>
-                    {/* DashboardPage */}
+                    {/* MembersPage */}
                     <ListItemButton component={Link} to="/dashboard">
                         <ListItemIcon><Dashboard /></ListItemIcon>
-                        <ListItemText primary="DashboardPage" />
+                        <ListItemText primary="Dashboard" />
                     </ListItemButton>
 
-                    <ListItemButton component={Link} to="/members">
-                        <ListItemIcon><People /></ListItemIcon>
-                        <ListItemText primary="Members" />
+                    <ListItemButton component={Link} to="/memberships">
+                        <ListItemIcon><CardMembership /></ListItemIcon>
+                        <ListItemText primary="Memberships" />
                     </ListItemButton>
-
 
                     <ListItemButton component={Link} to="/staff">
                         <ListItemIcon><Group /></ListItemIcon>
@@ -55,12 +54,6 @@ const Sidebar: React.FC = () => {
                     <ListItemButton component={Link} to="/classes">
                         <ListItemIcon><FitnessCenter /></ListItemIcon>
                         <ListItemText primary="Classes" />
-                    </ListItemButton>
-
-                    {/* ✅ Memberships Added Here */}
-                    <ListItemButton component={Link} to="/memberships">
-                        <ListItemIcon><CardMembership /></ListItemIcon>
-                        <ListItemText primary="Memberships" />
                     </ListItemButton>
 
                     <ListItemButton component={Link} to="/payments">

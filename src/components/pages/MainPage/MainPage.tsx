@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, Outlet} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {login, logout} from "redux/components/Auth/sources"; // Custom CSS for styling
 import { Box } from "@mui/material";
@@ -10,7 +10,6 @@ import {LinkTab} from "../../shared/LinkTab";
 import Sidebar from "../../shared/SideBar/SideBar";
 import Navbar from "../../shared/NavBar";
 import MainAppConnector from "./MainPageConnector";
-import DashboardPage from "../DashboardPage/DashboardPage";
 
 const MainPageComponent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	// const { auth } = props;
@@ -47,7 +46,7 @@ const MainPageComponent: React.FC<{ children: React.ReactNode }> = ({ children }
 			<Box className={styles.mainContent} sx={{ flexGrow: 1 }}>
 				<Navbar />
 				<Box className={styles.pageContent} sx={{ p: 3 }}>
-					<DashboardPage />
+					<Outlet />
 				</Box>
 			</Box>
 		</Box>

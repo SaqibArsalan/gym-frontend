@@ -1,0 +1,7 @@
+@import 'src/assets/scss/Variables.scss';
+
+.data-table-row {
+	&:hover {
+		background-color: $lightgrey;
+	}
+}

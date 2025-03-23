@@ -1,0 +1,56 @@
+@import 'src/assets/scss/Variables.scss';
+@import 'src/assets/scss/Extends.scss';
+
+.toolbar-content-wrapper {
+	width: 100%;
+	display: flex;
+	.textfield-wrapper {
+		flex-basis: 100%;
+		.table-search-bar-container {
+			&:hover {
+				border: 1px solid black;
+			}
+			border: 1px solid lightgray;
+			border-radius: 4px;
+			fieldset {
+				border: 0px !important;
+			}
+			.filter-dropdown {
+				.MuiSelect-select {
+					border-radius: 0px;
+					border-left: 1px solid lightgray;
+				}
+			}
+		}
+	}
+	.add-button-wrapper {
+		flex-basis: 0%;
+		position: relative;
+		margin-top: 10px;
+		button {
+			right: 0px;
+			top: 38px;
+			position: absolute;
+			z-index: 99;
+			background-color: $skyblue;
+		}
+	}
+}
+
+@media (max-width: $mobile-view) {
+	.toolbar-content-wrapper {
+		.textfield-wrapper {
+			.table-search-bar-container {
+				.filter-dropdown {
+					input {
+						border: 0px;
+					}
+					.MuiSelect-select {
+						border-top: 1px solid lightgray;
+						border-radius: 0px;
+					}
+				}
+			}
+		}
+	}
+}

@@ -7,12 +7,10 @@ import { IRootState } from 'redux/rootReducer';
 // State to bind
 const mapStateToProps = (state: IRootState) => ({
 	auth: state.auth,
-	activeMembersCount: state.miscellaneous.activeMembersCount,
-	activeSubscriptionsCount: state.miscellaneous.activeSubscriptionsCount,
-	newSignupsCount: state.miscellaneous.newSignupsCount
+	membersSubscriptions: state.members.membersSubscriptions
 });
 
-const DashboardConnector = (component: React.ComponentType<any>) =>
+const MembersPageConnector = (component: React.ComponentType<any>) =>
 	connect(mapStateToProps)(component as any);
 
-export default DashboardConnector;
+export default MembersPageConnector;

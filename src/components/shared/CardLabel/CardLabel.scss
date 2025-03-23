@@ -1,0 +1,10 @@
+@import 'assets/scss/Variables.scss';
+@import 'assets/scss/Extends.scss';
+
+.data-table-label {
+	flex: 1 1 100%;
+	padding: toRem(16);
+	font-size: toRem(14);
+	color: $gray;
+	text-align: left;
+}
