@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./MembersPage.css";
+import "./StaffPage.css";
 import {useDispatch} from "react-redux";
 import KpiCard from "../../shared/KpiCard/KpiCard";
-import {IMembersProps} from "./MembersPage.interface";
-import MembersPageConnector from "./MembersPageConnector";
+import {IStaffProps} from "./StaffPage.interface";
+import StaffPageConnector from "./StaffPageConnector";
 import {fetchMembersSubscriptions} from "../../../redux/components/Members/sources";
 import DataTable from "../../shared/DataTable/DataTable";
 import {IDataTableProps} from "../../shared/DataTable/DataTable.interface";
-import {generateTableData} from "./MembersPageHelper"; // Add styles
+import {generateTableData} from "./StaffPageHelper";
+import {fetchStaffList} from "../../../redux/components/Staff/sources"; // Add styles
 
-function Members(props: IMembersProps) {
+function Staff(props: IStaffProps) {
     const [activeMembers, setActiveMembers] = useState<number | null>(null);
-    const { membersSubscriptions} = props;
+    const { staffList } = props;
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchMembersSubscriptions());
+        dispatch(fetchStaffList());
     }, []);
 
     const otherProps: IDataTableProps = {
@@ -25,7 +26,7 @@ function Members(props: IMembersProps) {
     } as any;
 
     let tableProps: IDataTableProps = generateTableData(
-        membersSubscriptions || []
+        staffList || []
     );
     tableProps = { ...tableProps, ...otherProps };
 
@@ -36,6 +37,6 @@ function Members(props: IMembersProps) {
     );
 };
 
-const MembersPage = MembersPageConnector(Members)
-export default MembersPage;
+const StaffPage = StaffPageConnector(Staff)
+export default StaffPage;
 

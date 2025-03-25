@@ -15,7 +15,7 @@ export const tableColumnsMap: ItableColumnsMap[] = [
 	},
 	{
 		headerTitle: 'Plan Name',
-		valueKey: 'planName',
+		valueKey: 'membershipPlanName',
 	}
 ];
 

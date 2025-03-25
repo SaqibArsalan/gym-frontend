@@ -19,6 +19,7 @@ import RegisterPage from "../components/pages/RegistrationPage/RegistrationPage"
 import MainPage from "../components/pages/MainPage/MainPage";
 import MembersPage from "../components/pages/MembersPage/MembersPage";
 import DashboardPage from "../components/pages/DashboardPage/DashboardPage";
+import StaffPage from "../components/pages/StaffPage/StaffPage";
 
 // const isMicroBuild = Boolean(process.env.MICRO_BUILD);
 
@@ -38,6 +39,7 @@ const RootRoute = (props: { store: Store; mainTheme?: Theme }) => {
 					<Route index element={<DashboardPage />} />
 					<Route path="/dashboard" element={<DashboardPage />} />
 					<Route path="/memberships" element={<MembersPage />} />
+					<Route path="/staff" element={<StaffPage />} />
 				</Route>
 					<Route
 						path='*'
