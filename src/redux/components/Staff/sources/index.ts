@@ -10,6 +10,7 @@ import LoaderService from 'services/LoaderService';
 // // Interfaces
 import { IPaginationOption } from 'redux/interfaces';
 import {
+	GET_STAFF_DETAIL,
 	GET_STAFF_LIST
 
 } from '../Staff.constants';
@@ -30,3 +31,13 @@ export const fetchStaffList = () => async (dispatch: Dispatch<any>) => {
 		throwErrorToast(e);
 	}
 };
+
+export const fetchStaffDetail = (userId: string) => async (dispatch: Dispatch<any>) => {
+	try {
+		const client = new GymHttpClient({ dispatchError: false });
+		const staffDetail =  await Promise.resolve(client.get<IStaff>(`${GET_STAFF_DETAIL}/${userId}`));
+		dispatch(actions.fetchStaffDetailsSuccess(staffDetail));
+	} catch (e) {
+		throwErrorToast(e);
+	}
+}

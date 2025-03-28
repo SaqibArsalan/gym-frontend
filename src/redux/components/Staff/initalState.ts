@@ -2,7 +2,8 @@
 import {IStaffInitialState} from './Staff.interface';
 
 const staffInitialState: IStaffInitialState = {
-	staffList: []
+	staffList: [],
+	staffDetail: null
 };
 
 export default staffInitialState;

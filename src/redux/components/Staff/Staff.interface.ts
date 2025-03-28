@@ -2,10 +2,12 @@ import { IReduxAction } from 'redux/interfaces';
 
 export interface IStaffInitialState {
 	staffList: IStaff[];
+	staffDetail: IStaff | null;
 }
 export interface IStaffActions {
 	fetchWarehousesSuccess: IReduxAction<IWarehouse[]>;
 	fetchStaffListSuccess: IReduxAction<IStaff[]>;
+	fetchStaffDetailsSuccess: IReduxAction<IStaff>;
 }
 
 export interface IWarehouse {

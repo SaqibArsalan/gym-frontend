@@ -21,7 +21,12 @@ function Members(props: IMembersProps) {
 
     const otherProps: IDataTableProps = {
         showLoadMore: false,
-        showSearchBar: false,
+        showSearchBar: true,
+        searchBarProps: {
+            placeholder: 'Search Member',
+            showAddButton: true,
+        },
+
     } as any;
 
     let tableProps: IDataTableProps = generateTableData(

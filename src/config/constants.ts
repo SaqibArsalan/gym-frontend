@@ -8,10 +8,10 @@ import { IChildModuleInfo } from './interface';
 const ROUTES = {
 	ROOT: '/',
 	DASHBOARD: '/dashboard',
-	MEMBERS: '/members',
+	STAFF_DETAIL: '/staff-detail',
 	MEMBERSHIPS: '/memberships',
 	STAFF: '/staff',
-	MODULE_ROOT: '/',
+	MODULE_ROOT: '',
 };
 
 export const CHILD_MODULES_INFO: { [key: string]: IChildModuleInfo } = {

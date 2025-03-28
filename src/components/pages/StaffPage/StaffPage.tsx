@@ -1,34 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import axios from "axios";
 import "./StaffPage.css";
 import {useDispatch} from "react-redux";
+import { prepareRouteForNavigation } from 'utils/Route';
+import ROUTES from "config/constants";
+import {useNavigate} from "react-router-dom"; // Add styles
 import KpiCard from "../../shared/KpiCard/KpiCard";
 import {IStaffProps} from "./StaffPage.interface";
 import StaffPageConnector from "./StaffPageConnector";
 import {fetchMembersSubscriptions} from "../../../redux/components/Members/sources";
 import DataTable from "../../shared/DataTable/DataTable";
-import {IDataTableProps} from "../../shared/DataTable/DataTable.interface";
+import {IDataTableProps, ITableBodyRow} from "../../shared/DataTable/DataTable.interface";
 import {generateTableData} from "./StaffPageHelper";
-import {fetchStaffList} from "../../../redux/components/Staff/sources"; // Add styles
+import {fetchStaffList} from "../../../redux/components/Staff/sources";
 
 function Staff(props: IStaffProps) {
     const [activeMembers, setActiveMembers] = useState<number | null>(null);
     const { staffList } = props;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchStaffList());
     }, []);
 
-    const otherProps: IDataTableProps = {
-        showLoadMore: false,
-        showSearchBar: false,
-    } as any;
+    const navigateToStaffDetail = useCallback((userId: string) => {
+        const route = prepareRouteForNavigation(ROUTES.STAFF_DETAIL);
+        navigate(`${route}/${userId}`, { replace: true });
+    }, []);
 
-    let tableProps: IDataTableProps = generateTableData(
-        staffList || []
+    const openStaffDetail = (value: ITableBodyRow) => {
+        const { rowIndex } = value;
+        if (rowIndex !== undefined) {
+            const { userId } = staffList[rowIndex];
+            console.log("userId is ", userId);
+            navigateToStaffDetail(userId);
+        }
+    };
+
+    const tableProps: IDataTableProps = generateTableData(
+        staffList || [], {
+            showLoadMore: false,
+            showSearchBar: true,
+            searchBarProps: {
+                placeholder: 'Search Staff',
+                showAddButton: true,
+                },
+            onRowClick: openStaffDetail,
+        }
     );
-    tableProps = { ...tableProps, ...otherProps };
 
     return (
         <div>

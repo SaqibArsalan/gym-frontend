@@ -6,8 +6,8 @@ import { format, parseISO } from 'date-fns';
 import {
 	tableColumnsMap,
 	defaultBodyColumnsConfigs,
-} from './StaffPage.configs';
-import { ItableColumnsMap } from './StaffPage.interface';
+} from './StaffDetail.configs';
+import { ItableColumnsMap } from './StaffDetail.interface';
 import {IMembersSubscriptions} from "../../../redux/components/Members";
 import {IStaff} from "../../../redux/components/Staff";
 
