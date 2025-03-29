@@ -6,9 +6,10 @@ import { format, parseISO } from 'date-fns';
 import {
 	tableColumnsMap,
 	defaultBodyColumnsConfigs,
-} from './MembersPage.configs';
-import { ItableColumnsMap } from './MembersPage.interface';
+} from './MemberDetail.configs';
+import { ItableColumnsMap } from './MemberDetail.interface';
 import {IMembersSubscriptions} from "../../../redux/components/Members";
+import {IStaff} from "../../../redux/components/Staff";
 
 export const generateTableHeaderColumns = () =>
 	tableColumnsMap.map((record: ItableColumnsMap) => ({
@@ -32,7 +33,7 @@ export const generateRowColumnsForItem = (
 	});
 
 export const generateTableData = (
-	membersSubscriptions: IMembersSubscriptions[],
+	staffList: IStaff[],
 	otherProps: any
 ): IDataTableProps => ({
 	isStickyHeader: true,
@@ -40,10 +41,10 @@ export const generateTableData = (
 		columns: generateTableHeaderColumns(),
 	},
 	body: {
-		rows: membersSubscriptions.map((subscriptions: any, index: number) => ({
+		rows: staffList.map((subscriptions: any, index: number) => ({
 			columns: generateRowColumnsForItem(subscriptions, index),
-			onRowClick: otherProps.onRowClick || undefined,
+			onRowClick: otherProps.onRowClick || undefined
 		})) as ITableBodyRow[],
 	},
-	...otherProps
+	...otherProps,
 });

@@ -33,7 +33,6 @@ function Staff(props: IStaffProps) {
         const { rowIndex } = value;
         if (rowIndex !== undefined) {
             const { userId } = staffList[rowIndex];
-            console.log("userId is ", userId);
             navigateToStaffDetail(userId);
         }
     };

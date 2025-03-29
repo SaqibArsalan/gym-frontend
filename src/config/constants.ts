@@ -10,6 +10,7 @@ const ROUTES = {
 	DASHBOARD: '/dashboard',
 	STAFF_DETAIL: '/staff-detail',
 	MEMBERSHIPS: '/memberships',
+	MEMBERSHIPS_DETAIL: '/memberships-detail',
 	STAFF: '/staff',
 	MODULE_ROOT: '',
 };

@@ -4,23 +4,22 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import ROUTES from "config/constants";
-import {IStaffProps} from "../StaffPage/StaffPage.interface";
-import {fetchStaffDetail} from "../../../redux/components/Staff/sources";
 import {prepareRouteForNavigation} from "../../../utils/Route";
-import StaffDetailConnector from "./StaffDetailConnector";
-import {IStaffDetailProps} from "./StaffDetail.interface";
+import MemberDetailConnector from "./MemberDetailConnector";
+import {IMemberDetailProps} from "./MemberDetail.interface";
+import {fetchMemberDetail} from "../../../redux/components/Members/sources";
 
 
-function StaffDetailComponent(props: IStaffDetailProps) {
+function MemberDetailComponent(props: IMemberDetailProps) {
     const [activeMembers, setActiveMembers] = useState<number | null>(null);
-    const {staffDetail} = props;
+    const {memberDetail} = props;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
 
     useEffect(() => {
-        if (params.userId) {
-            dispatch(fetchStaffDetail(params.userId));
+        if (params.memberId) {
+            dispatch(fetchMemberDetail(params.memberId));
         } else {
             // redirect to listing page
             const route = prepareRouteForNavigation(ROUTES.STAFF);
@@ -31,7 +30,7 @@ function StaffDetailComponent(props: IStaffDetailProps) {
         };
     }, []);
 
-    const StaffDetailSubHeader = ({staffName}: { staffName: string }) => (
+    const MemberDetailSubHeader = ({memberName}: { memberName: string }) => (
         <Paper className="fleet-tour-sub-header" elevation={0} square>
             <Toolbar>
                 <Box display="flex" alignItems="center" width="100%">
@@ -46,7 +45,7 @@ function StaffDetailComponent(props: IStaffDetailProps) {
                             </Breadcrumbs>
                         </div>
                         <Typography variant="h6" component="div">
-                            {staffName.toUpperCase()}
+                            {memberName.toUpperCase()}
                         </Typography>
                     </Box>
                     <Button variant="contained" color="primary" onClick={() => console.log("Edit Clicked")}>
@@ -57,12 +56,12 @@ function StaffDetailComponent(props: IStaffDetailProps) {
         </Paper>
     );
 
-    const StaffBasicInfo = ({ staffInfo }: { staffInfo: any }) => {
-        const {userId, salary, hireDate} = staffInfo;
+    const MemberBasicInfo = ({ memberInfo }: { memberInfo: any }) => {
+        const {membershipPlanName, joinDate, expiryDate} = memberInfo;
         const infoItems = [
-            {title: "User ID", value: userId},
-            {title: "Salary", value: salary},
-            {title: "Hire Date", value: hireDate},
+            {title: "Plan Name", value: membershipPlanName},
+            {title: "Join Date", value: joinDate},
+            {title: "End Date", value: expiryDate},
         ];
 
         return (
@@ -93,17 +92,17 @@ function StaffDetailComponent(props: IStaffDetailProps) {
         );
     };
 
-    return staffDetail ? (
+    return memberDetail ? (
         <>
-            <StaffDetailSubHeader staffName={staffDetail.name}/>
+            <MemberDetailSubHeader memberName={memberDetail.memberName}/>
             <Grid container rowSpacing={3} columnSpacing={3}>
                 <Grid item xs={12}>
-                    <StaffBasicInfo staffInfo={staffDetail} />
+                    <MemberBasicInfo memberInfo={memberDetail} />
                 </Grid>
             </Grid>
         </>
     ) : null
 }
 
-const StaffDetailsPage = StaffDetailConnector(StaffDetailComponent)
-export default StaffDetailsPage;
+const MemberDetailsPage = MemberDetailConnector(MemberDetailComponent)
+export default MemberDetailsPage;

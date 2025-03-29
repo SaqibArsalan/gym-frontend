@@ -14,3 +14,15 @@ export const fetchMembersSubscriptionsSuccess = (
 	}
 	return state;
 };
+
+export const fetchMemberDetailsSuccess = (
+	state: IMembersInitialState,
+	action: IReduxActionResponse<IMembersSubscriptions>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, memberDetails: payload };
+	}
+
+	return state;
+}

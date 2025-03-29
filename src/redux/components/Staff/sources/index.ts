@@ -35,7 +35,7 @@ export const fetchStaffList = () => async (dispatch: Dispatch<any>) => {
 export const fetchStaffDetail = (userId: string) => async (dispatch: Dispatch<any>) => {
 	try {
 		const client = new GymHttpClient({ dispatchError: false });
-		const staffDetail =  await Promise.resolve(client.get<IStaff>(`${GET_STAFF_DETAIL}/${userId}`));
+		const staffDetail =  await Promise.resolve(client.get<IStaff>(GET_STAFF_DETAIL.replace("userId", userId)));
 		dispatch(actions.fetchStaffDetailsSuccess(staffDetail));
 	} catch (e) {
 		throwErrorToast(e);
