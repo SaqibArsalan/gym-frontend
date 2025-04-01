@@ -1,0 +1,21 @@
+@import 'assets/scss/Variables.scss';
+@import 'assets/scss/Extends.scss';
+
+.form-sub-header {
+	border: 0px !important;
+	margin-bottom: toRem(30);
+	
+	:global(.MuiToolbar-root) {
+		padding: 0px !important;
+	}
+
+	#title {
+		flex: 1 1 50%;
+		text-align: left;
+		font-size: toRem(24);
+	}
+
+	:global(p) {
+		color: $quote-author-text-color;
+	}
+}

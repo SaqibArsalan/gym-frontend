@@ -23,7 +23,7 @@ function StaffDetailComponent(props: IStaffDetailProps) {
             dispatch(fetchStaffDetail(params.userId));
         } else {
             // redirect to listing page
-            const route = prepareRouteForNavigation(ROUTES.STAFF);
+            const route = prepareRouteForNavigation(ROUTES.STAFF_LISTING);
             navigate(route, { replace: true });
         }
         return () => {

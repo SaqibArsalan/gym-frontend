@@ -6,7 +6,7 @@ function NavigationRoot() {
 	const navigate = useNavigate();
 
 	const navigateFunc = (route: string) => {
-		navigate(route, { replace: false });
+		navigate(route, { replace: true });
 	};
 
 	useEffect(() => {

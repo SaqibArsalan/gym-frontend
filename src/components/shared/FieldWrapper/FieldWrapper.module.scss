@@ -1,0 +1,16 @@
+
+@import 'assets/scss/Variables.scss';
+@import 'assets/scss/Extends.scss';
+
+#field-wrapper-container {
+        .info-container {
+            margin-top: 14px;
+        }
+        .heading {
+            font-size: toRem(14);
+        }
+        .sub-heading {
+            color: $gray;
+            font-size: toRem(14);
+        }
+ }

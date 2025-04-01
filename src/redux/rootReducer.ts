@@ -3,9 +3,10 @@ import * as Auth from './components/Auth';
 import * as Miscellaneous from './components/Miscellaneous';
 import * as Members from "./components/Members";
 import * as Staff from "./components/Staff";
+import * as User from "./components/User";
 
 // add modules here after import to register reducers
-const modules = [Auth, Miscellaneous, Members, Staff];
+const modules = [Auth, Miscellaneous, Members, Staff, User];
 
 const rootReducer = combineReducers(
 	modules.reduce((reducersObject: any, module) => {
@@ -20,6 +21,7 @@ export interface IRootState {
 	[Miscellaneous.reducerName]: Miscellaneous.IMiscellaneousInitialState;
 	[Members.reducerName]: Members.IMembersInitialState;
 	[Staff.reducerName]: Staff.IStaffInitialState;
+	[User.reducerName]: User.IUserInitialState;
 }
 
 export default rootReducer;

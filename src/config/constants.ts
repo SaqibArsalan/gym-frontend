@@ -9,9 +9,10 @@ const ROUTES = {
 	ROOT: '/',
 	DASHBOARD: '/dashboard',
 	STAFF_DETAIL: '/staff-detail',
-	MEMBERSHIPS: '/memberships',
+	MEMBERSHIP_LISTING: '/memberships',
 	MEMBERSHIPS_DETAIL: '/memberships-detail',
-	STAFF: '/staff',
+	STAFF_LISTING: '/staff',
+	STAFF_CREATE: '/staff-create',
 	MODULE_ROOT: '',
 };
 

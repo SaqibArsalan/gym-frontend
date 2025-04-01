@@ -2,7 +2,6 @@ import { Dispatch } from 'react';
 import { GymHttpClient } from 'redux/client';
 import LoaderService from 'services/LoaderService';
 import * as SourceHelpers from 'redux/utils/source.helper';
-import NavigationService from 'services/NavigationService';
 import * as RouteHelper from 'utils/Route';
 import ROUTES from 'config/constants';
 import { actions } from '../index';
@@ -25,7 +24,7 @@ jest.mock(
 const loaderServiceMockShowSpy = jest.spyOn(LoaderService, 'show');
 const loaderServiceMockHideSpy = jest.spyOn(LoaderService, 'hide');
 
-const navigateMock = jest.spyOn(NavigationService, 'navigate');
+// const navigateMock = jest.spyOn(NavigationService, 'navigate');
 
 const errorToastMock = jest.spyOn(SourceHelpers, 'throwErrorToast');
 const successToastMock = jest.spyOn(SourceHelpers, 'throwSuccessToast');

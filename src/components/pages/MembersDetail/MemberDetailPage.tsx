@@ -22,7 +22,7 @@ function MemberDetailComponent(props: IMemberDetailProps) {
             dispatch(fetchMemberDetail(params.memberId));
         } else {
             // redirect to listing page
-            const route = prepareRouteForNavigation(ROUTES.STAFF);
+            const route = prepareRouteForNavigation(ROUTES.STAFF_LISTING);
             navigate(route, { replace: true });
         }
         return () => {

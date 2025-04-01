@@ -1,0 +1,16 @@
+
+@import 'src/assets/scss/Variables.scss';
+@import 'src/assets/scss/Extends.scss';
+
+#staff-info-container {
+        #title {
+            font-size: toRem(18);
+        }
+        #heading {
+            font-size: toRem(14);
+        }
+        #sub-heading {
+            color: gray;
+            font-size: toRem(14);
+        }
+ }

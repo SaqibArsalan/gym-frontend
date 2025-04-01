@@ -1,14 +1,15 @@
 import React from 'react';
 import LoaderRoot from './LoaderService/component/LoaderRoot';
 import ModalRoot from './ModalService/component/ModalRoot';
-import ToastRoot from './ToastService/component/ToastRoot';
-import NavigationRoot from './NavigationService/component/NavigationRoot';
+import NavigationRoot from "./NavigationService/component/NavigationRoot";
+import ToastRoot from "./ToastService/component/ToastRoot";
 
 const RootService = () => (
 	<>
 		<ModalRoot />
-		<LoaderRoot />
 		<NavigationRoot />
+		<LoaderRoot />
+		<ToastRoot />
 	</>
 );
 

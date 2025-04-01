@@ -29,6 +29,11 @@ function Staff(props: IStaffProps) {
         navigate(`${route}/${userId}`, { replace: true });
     }, []);
 
+    const navigateToStaffCreation = useCallback(() => {
+        const route = prepareRouteForNavigation(ROUTES.STAFF_CREATE);
+        navigate(route, { replace: true });
+    }, []);
+
     const openStaffDetail = (value: ITableBodyRow) => {
         const { rowIndex } = value;
         if (rowIndex !== undefined) {
@@ -44,6 +49,7 @@ function Staff(props: IStaffProps) {
             searchBarProps: {
                 placeholder: 'Search Staff',
                 showAddButton: true,
+                onAddButtonClick: navigateToStaffCreation,
                 },
             onRowClick: openStaffDetail,
         }

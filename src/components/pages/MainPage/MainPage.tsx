@@ -10,6 +10,7 @@ import {LinkTab} from "../../shared/LinkTab";
 import Sidebar from "../../shared/SideBar/SideBar";
 import Navbar from "../../shared/NavBar";
 import MainAppConnector from "./MainPageConnector";
+import RootService from "../../../services/RootService";
 
 const MainPageComponent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	// const { auth } = props;
@@ -45,6 +46,7 @@ const MainPageComponent: React.FC<{ children: React.ReactNode }> = ({ children }
 			<Sidebar />
 			<Box className={styles.mainContent} sx={{ flexGrow: 1 }}>
 				<Navbar />
+				<RootService />
 				<Box className={styles.pageContent} sx={{ p: 3 }}>
 					<Outlet />
 				</Box>
