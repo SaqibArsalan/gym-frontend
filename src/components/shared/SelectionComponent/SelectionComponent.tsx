@@ -30,7 +30,8 @@ export default function SelectionComponent(props: ISelectionComponentProps) {
 		if (!selected && placeholder) {
 			return <span style={{ color: 'gray' }}>{placeholder}</span>;
 		}
-		return selected;
+		const selectedItem = values?.find((item: any) => item.id === selected);
+		return selectedItem ? selectedItem[itemKey] : selected;
 	};
 
 	const onSelection = (event: any) => {

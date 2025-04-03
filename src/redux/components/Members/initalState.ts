@@ -3,7 +3,8 @@ import {IMembersInitialState} from './Members.interface';
 
 const membersInitialState: IMembersInitialState = {
 	membersSubscriptions: [],
-	memberDetails: null
+	memberDetails: null,
+	membershipPlans: []
 };
 
 export default membersInitialState;

@@ -1,5 +1,6 @@
 import { IReduxActionResponse } from 'redux/interfaces';
 import {
+	IMembershipPlan,
 	IMembersInitialState, IMembersSubscriptions,
 	IWarehouse,
 } from '../Members.interface';
@@ -26,3 +27,14 @@ export const fetchMemberDetailsSuccess = (
 
 	return state;
 }
+
+export const fetchMembershipPlanSuccess = (
+	state: IMembersInitialState,
+	action: IReduxActionResponse<IMembershipPlan[]>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, membershipPlans: payload};
+	}
+	return state;
+};

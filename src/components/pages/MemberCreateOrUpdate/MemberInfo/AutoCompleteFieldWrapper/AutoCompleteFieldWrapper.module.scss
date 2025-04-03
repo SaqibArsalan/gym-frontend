@@ -1,0 +1,11 @@
+
+@import 'assets/scss/Variables.scss';
+@import 'assets/scss/Extends.scss';
+
+#dropdown-wrapper {
+    display: flex;
+    :global(.MuiFormLabel-root) {
+        margin-bottom: 0px;
+        font-size: 12px;
+    }
+}

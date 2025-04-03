@@ -5,36 +5,44 @@ import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import ROUTES from "config/constants";
 import debounce from '@mui/utils/debounce';
-import {FIELD_KEYS} from "../StaffCreateOrUpdate.constants";
-import {generateDynamicComponentsWithProps, validateForm} from "./StaffInfoHelper";
+import {FIELD_KEYS} from "../MemberCreateOrUpdate.constants";
+import {generateDynamicComponentsWithProps, validateForm} from "./MemberInfoHelper";
 import {IAutoCompleteComponentProps} from "../../../shared/AutoCompleteComponent/AutoCompleteComponent.interface";
-import styles from './StaffInfo.module.scss';
+import styles from './MemberInfo.module.scss';
 import {FieldWrapperComponent} from "../../../shared/FieldWrapper/FieldWrapper";
 import AutoCompleteComponent from "../../../shared/AutoCompleteComponent/AutoCompleteComponent";
 import ActionButtons from "../../../shared/ActionButtons/ActionButtons";
-import {IStaffInfoProps} from "./StaffInfo.interface";
+import {IMemberInfoProps} from "./MemberInfo.interface";
 import {fetchUsersByName} from "../../../../redux/components/User/sources";
+import {fetchMembershipPlans} from "../../../../redux/components/Members/sources";
+import SelectionComponent from "../../../shared/SelectionComponent/SelectionComponent";
+import SelectFieldWrapper from "./SelectFieldWrapper/SelectFieldWrapper";
+import {ISelectFieldWrapperProps} from "./SelectFieldWrapper/SelectFieldWrapper.interface";
+import {IMembershipPlan} from "../../../../redux/components/Members";
 
 
-function StaffInfo(props: IStaffInfoProps) {
-    const [activeMembers, setActiveMembers] = useState<number | null>(null);
-    const {staffCreationPayload, usersByNameList, onContinue, ...rest} = props;
+function MemberInfo(props: IMemberInfoProps) {
+    const {memberCreationPayload, usersByNameList, membershipPlans ,onContinue, ...rest} = props;
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const params = useParams();
-    const [activeStep, setActiveStep] = useState<number>(0);
+
+    useEffect(() => {
+        dispatch(fetchMembershipPlans());
+    }, []);
 
     const onContinueClick = () => {
-        const isValidated = validateForm(staffCreationPayload);
+        const isValidated = validateForm(memberCreationPayload);
         if (onContinue && isValidated) {
             onContinue();
         }
     };
 
     const onChange = (id: string, value: any) => {
-        (staffCreationPayload as any)[id] = value;
+        (memberCreationPayload as any)[id] = value;
         if (id === FIELD_KEYS.USER) {
-            (staffCreationPayload as any)[FIELD_KEYS.USER] = value ? value.id : '';
+            (memberCreationPayload as any)[FIELD_KEYS.USER] = value ? value.id : '';
+        }
+        if (id === FIELD_KEYS.PLAN) {
+            (memberCreationPayload as any)[FIELD_KEYS.PLAN] = value;
         }
     };
 
@@ -62,27 +70,38 @@ function StaffInfo(props: IStaffInfoProps) {
         onSelection: onChange,
     };
 
+    const membershipPlanProps: ISelectFieldWrapperProps = {
+        label: 'Membership Plan',
+        placeholder: 'eg: Monthly',
+        fieldKey: FIELD_KEYS.PLAN,
+        items: membershipPlans,
+        onChange
+    };
+
     const fieldsToRender = generateDynamicComponentsWithProps({
-        staffCreationPayload,
+        memberCreationPayload,
         onChange
     });
 
     return (
-        <div id={styles.staffInfoContainer}>
+        <div id={styles.memberInfoContainer}>
             <Paper className='basic-info-paper' elevation={3} sx={{ padding: '30px' }}>
                 <Stack spacing={4}>
                     <Box>
                         <Typography id={styles.title} component='p'>
-                            Staff Details
+                            Member Details
                         </Typography>
                         <Typography id={styles.subHeading} component='p'>
-                            Enter staff details
+                            Enter Member details
                         </Typography>
                     </Box>
                     <Divider />
                     <Stack spacing={5}>
                         <FieldWrapperComponent heading='User' subHeading='Select User'>
                             <AutoCompleteComponent {...userProps} />
+                        </FieldWrapperComponent>
+                        <FieldWrapperComponent heading='Plan' subHeading='Select Plan'>
+                            <SelectFieldWrapper {...membershipPlanProps} />
                         </FieldWrapperComponent>
                         {fieldsToRender}
                     </Stack>
@@ -94,4 +113,4 @@ function StaffInfo(props: IStaffInfoProps) {
 }
 
 
-export default StaffInfo;
+export default MemberInfo;

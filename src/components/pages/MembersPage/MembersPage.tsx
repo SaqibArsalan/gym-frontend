@@ -28,11 +28,15 @@ function Members(props: IMembersProps) {
         navigate(`${route}/${memberId}`, { replace: true });
     }, []);
 
+    const navigateToMemberCreation = useCallback(() => {
+        const route = prepareRouteForNavigation(ROUTES.MEMBER_CREATE);
+        navigate(route, { replace: true });
+    }, []);
+
     const openMemberDetail = (value: ITableBodyRow) => {
         const { rowIndex } = value;
         if (rowIndex !== undefined) {
             const { membershipId } = membersSubscriptions[rowIndex];
-            console.log("memberId is ", membershipId);
             navigateToMemberDetail(membershipId);
         }
     };
@@ -43,6 +47,7 @@ function Members(props: IMembersProps) {
         searchBarProps: {
             placeholder: 'Search Member',
             showAddButton: true,
+            onAddButtonClick: navigateToMemberCreation
         },
 
     } as any;
