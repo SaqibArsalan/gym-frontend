@@ -24,6 +24,8 @@ import StaffDetail from "../components/pages/StaffDetail/StaffDetail";
 import MemberDetailsPage from "../components/pages/MembersDetail/MemberDetailPage";
 import StaffCreateOrUpdate from "../components/pages/StaffCreateOrUpdate/StaffCreateOrUpdate";
 import MemberCreateOrUpdate from "../components/pages/MemberCreateOrUpdate/MemberCreateOrUpdate";
+import UserPage from "../components/pages/UserPage/UserPage";
+import UserCreateOrUpdate from "../components/pages/UserCreateOrUpdate/UserCreateOrUpdate";
 
 // const isMicroBuild = Boolean(process.env.MICRO_BUILD);
 
@@ -42,6 +44,8 @@ const RootRoute = (props: { store: Store; mainTheme?: Theme }) => {
 				<Route path="/" element={<MainPage> {/* Acts as Layout */} </MainPage>}>
 					<Route index element={<DashboardPage />} />
 					<Route path={`${ROUTES.DASHBOARD}`} element={<DashboardPage />} />
+					<Route path={`${ROUTES.USER_LISTING}`} element={<UserPage />} />
+					<Route path={`${ROUTES.USER_CREATE}`} element={<UserCreateOrUpdate />} />
 					<Route path={`${ROUTES.MEMBERSHIP_LISTING}`} element={<MembersPage />} />
 					<Route path={`${ROUTES.STAFF_LISTING}`} element={<StaffPage />} />
 					<Route path={`${ROUTES.STAFF_CREATE}`} element={<StaffCreateOrUpdate />} />

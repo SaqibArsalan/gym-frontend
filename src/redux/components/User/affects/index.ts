@@ -1,5 +1,6 @@
 import { IReduxActionResponse } from 'redux/interfaces';
 import {
+	IUserInfo,
 	IUserInitialState, IUsersDropdown
 } from '../User.interface';
 
@@ -10,6 +11,17 @@ export const fetchUsersByNameListSuccess = (
 	const { payload } = action;
 	if (payload) {
 		state = { ...state, usersByNameList: payload};
+	}
+	return state;
+};
+
+export const fetchUsersListSuccess = (
+	state: IUserInitialState,
+	action: IReduxActionResponse<IUserInfo[]>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, usersList: payload};
 	}
 	return state;
 };

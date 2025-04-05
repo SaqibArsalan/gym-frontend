@@ -41,6 +41,11 @@ const Sidebar: React.FC = () => {
                         <ListItemText primary="Dashboard" />
                     </ListItemButton>
 
+                    <ListItemButton component={Link} to="/users">
+                        <ListItemIcon><Group /></ListItemIcon>
+                        <ListItemText primary="Users" />
+                    </ListItemButton>
+
                     <ListItemButton component={Link} to="/memberships">
                         <ListItemIcon><CardMembership /></ListItemIcon>
                         <ListItemText primary="Memberships" />

@@ -25,8 +25,8 @@ export const memberCreationFields: IMemberCreationField[] = [
 	},
 	{
 		wrapperProps: {
-			heading: 'Duration In Months',
-			subHeading: 'Provide the duration in months',
+			heading: 'Duration',
+			subHeading: 'Provide the duration',
 			fieldLabel: 'DURATION',
 			fieldPlaceholder: 'eg: 3',
 		},

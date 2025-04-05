@@ -7,6 +7,8 @@ import { IChildModuleInfo } from './interface';
 
 const ROUTES = {
 	ROOT: '/',
+	LOGIN: '/login',
+	REGISTER: '/register',
 	DASHBOARD: '/dashboard',
 	MEMBERSHIP_LISTING: '/memberships',
 	MEMBER_CREATE: '/memberships-create',
@@ -14,6 +16,8 @@ const ROUTES = {
 	STAFF_LISTING: '/staff',
 	STAFF_CREATE: '/staff-create',
 	STAFF_DETAIL: '/staff-detail',
+	USER_LISTING: '/users',
+	USER_CREATE: '/user-create',
 	MODULE_ROOT: '',
 };
 
