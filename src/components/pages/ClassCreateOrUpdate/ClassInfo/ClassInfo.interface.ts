@@ -9,6 +9,7 @@ import {IStepComponentProps} from "../ClassCreateOrUpdate.interface";
 import {IUsersDropdown} from "../../../../redux/components/User";
 import {ICreateOrUpdateClass} from "../../../../redux/components/Gym Class";
 import {IDropdownResponse} from "../../../../redux/components/Staff";
+import {IDateTimeFieldWrapperProps} from "./DateTimeFieldWrapper/DateTimeFieldWrapper.interface";
 
 export interface IClassInfoProps extends IStepComponentProps {
 	staffByNameList: IDropdownResponse[];
@@ -31,7 +32,8 @@ export type IClassCreationFieldComponentProps =
 	| IAutoCompleteFieldWrapperProps
 	| IMultiSelectFieldWrapperProps
 	| ITextFieldWrapperProps
-	| IDateFieldWrapperProps;
+	| IDateFieldWrapperProps
+ 	| IDateTimeFieldWrapperProps;
 
 export interface IClassCreationField {
 	wrapperProps: IFieldWrapper;

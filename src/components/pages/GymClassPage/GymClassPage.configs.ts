@@ -14,6 +14,10 @@ export const tableColumnsMap: ItableColumnsMap[] = [
 		valueKey: 'capacity',
 	},
 	{
+		headerTitle: 'Date',
+		valueKey: 'date',
+	},
+	{
 		headerTitle: 'Start Time',
 		valueKey: 'startTime',
 	},

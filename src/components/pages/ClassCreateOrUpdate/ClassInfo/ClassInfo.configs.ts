@@ -5,6 +5,8 @@ import {FIELD_KEYS} from "../ClassCreateOrUpdate.constants";
 import {ITextFieldWrapperProps} from "./TextFieldWrapper/TextFieldWrapper.interface";
 import DateFieldWrapper from "./DateFieldWrapper/DateFieldWrapper";
 import {IDateFieldWrapperProps} from "./DateFieldWrapper/DateFieldWrapper.interface";
+import DateTimeFieldWrapper from "./DateTimeFieldWrapper/DateTimeFieldWrapper";
+import {IDateTimeFieldWrapperProps} from "./DateTimeFieldWrapper/DateTimeFieldWrapper.interface";
 
 
 export const classCreationFields: IClassCreationField[] = [
@@ -57,30 +59,30 @@ export const classCreationFields: IClassCreationField[] = [
 		wrapperProps: {
 			heading: 'Start Time',
 			subHeading: 'Select the Start Time',
-			fieldLabel: 'Time',
+			fieldLabel: 'Start Time',
 			fieldPlaceholder: 'eg: 12:00:00',
 		},
-		components: [TextFieldWrapper],
+		components: [DateTimeFieldWrapper],
 		componentProps: [
 			{
 				disabled: false,
 				fieldKey: FIELD_KEYS.START_TIME,
-			} as ITextFieldWrapperProps,
+			} as IDateTimeFieldWrapperProps,
 		],
 	},
 	{
 		wrapperProps: {
 			heading: 'End Time',
 			subHeading: 'Select the End Time',
-			fieldLabel: 'Time',
+			fieldLabel: 'End Time',
 			fieldPlaceholder: 'eg: 12:00:00',
 		},
-		components: [TextFieldWrapper],
+		components: [DateTimeFieldWrapper],
 		componentProps: [
 			{
 				disabled: false,
 				fieldKey: FIELD_KEYS.END_TIME,
-			} as ITextFieldWrapperProps,
+			} as IDateTimeFieldWrapperProps,
 		],
 	}
 ];

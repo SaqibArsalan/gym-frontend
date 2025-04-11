@@ -23,6 +23,15 @@ export const generateRowColumnsForItem = (
 			...defaultBodyColumnsConfigs,
 		};
 
+		if (valueKey === 'date') {
+			const date: string = (item as any).startTime;
+			if (date) {
+				result.text = format(new Date(date), 'dd MMMM, yyyy');
+			} else {
+				result.text = 'Not available';
+			}
+		}
+
 		if (valueKey === 'startTime' && result.text !== 'Not available') {
 			result.text = format(new Date(value), "hh:mm a");
 		}
