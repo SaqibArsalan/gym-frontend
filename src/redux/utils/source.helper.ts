@@ -6,6 +6,5 @@ export const throwErrorToast = (e: any) => {
 };
 
 export const throwSuccessToast = (text: string) => {
-	console.log("text is ", text);
 	ToastService.success({ text });
 };

@@ -3,30 +3,39 @@ import './LoginPage.scss';
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {login} from "redux/components/Auth/sources";
+import ROUTES from "config/constants";
 import LoginConnector from "./LoginPageConnector";
-import {filterModuleWrtRoles, getActiveModuleIndex} from "../MainPage/MainPage.helpers";
-import {IHEADER_LINKS_INFO} from "../MainPage/MainPage.interface";
-import {LinkTab} from "../../shared/LinkTab"; // Custom CSS for styling
+import {ILoginPageProps} from "./LoginPage.interface";
+import {prepareRouteForNavigation} from "../../../utils/Route";
+import {fetchMembershipPlans} from "../../../redux/components/Members/sources";
 
-const LoginPageComponent: React.FC = () => {
+function LoginPageComponent(props: ILoginPageProps) {
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [error, setError] = useState<string>('');
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const { userDetails } = props;
+
+	const handleLogin = async () => {
 		if (username && password) {
 			dispatch(login(username, password))
 		}
 	};
+
+	useEffect(() => {
+		if (userDetails) {
+			const route = prepareRouteForNavigation(ROUTES.DASHBOARD);
+			navigate(route, { replace: true });
+		}
+	}, [userDetails, navigate]);
 
 	return (
 
 		<div className="login-container">
 			<div className="login-form">
 				<h2>Login</h2>
-				<form onSubmit={handleLogin}>
 					<div className="input-group">
 						<input
 							id="username"
@@ -46,8 +55,7 @@ const LoginPageComponent: React.FC = () => {
 							required/>
 					</div>
 					{error && <p className="error">{error}</p>}
-					<button type="submit" className="login-button">Login</button>
-				</form>
+					<button type="submit" className="login-button" onClick={handleLogin}>Login</button>
 
 				{/* Add the Register hyperlink here */}
 				<p className="register-link">

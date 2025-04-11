@@ -1,4 +1,4 @@
-import { IAuthInitialState } from './Auth.interface';
+import {IAuthenticationResponse, IAuthInitialState} from './Auth.interface';
 
 const authInitialState: IAuthInitialState = {
 	isLoading: false,
@@ -10,6 +10,7 @@ const authInitialState: IAuthInitialState = {
 	mfa: null,
 	isValidateMFASuccess: false,
 	roles: [],
+	userDetails: null
 };
 
 export default authInitialState;

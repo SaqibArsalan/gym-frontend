@@ -24,8 +24,8 @@ function Staff(props: IUserProps) {
         dispatch(fetchAllUsers());
     }, []);
 
-    const navigateToStaffDetail = useCallback((userId: string) => {
-        const route = prepareRouteForNavigation(ROUTES.STAFF_DETAIL);
+    const navigateToUserDetail = useCallback((userId: string) => {
+        const route = prepareRouteForNavigation(ROUTES.USER_DETAIL);
         navigate(`${route}/${userId}`, { replace: true });
     }, []);
 
@@ -34,11 +34,11 @@ function Staff(props: IUserProps) {
         navigate(route, { replace: true });
     }, []);
 
-    const openStaffDetail = (value: ITableBodyRow) => {
+    const openUserDetail = (value: ITableBodyRow) => {
         const { rowIndex } = value;
         if (rowIndex !== undefined) {
             const { id } = userList[rowIndex];
-            navigateToStaffDetail(id);
+            navigateToUserDetail(id);
         }
     };
 
@@ -51,7 +51,7 @@ function Staff(props: IUserProps) {
                 showAddButton: true,
                 onAddButtonClick: navigateToUserCreation,
                 },
-            onRowClick: openStaffDetail,
+            onRowClick: openUserDetail,
         }
     );
 

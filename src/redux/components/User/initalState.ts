@@ -3,7 +3,8 @@ import {IUserInitialState} from './User.interface';
 
 const userInitialState: IUserInitialState = {
 	usersByNameList: [],
-	usersList: []
+	usersList: [],
+	userDetail: null
 };
 
 export default userInitialState;

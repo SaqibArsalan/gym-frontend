@@ -1,14 +1,14 @@
 import { IReduxActionResponse } from 'redux/interfaces';
 import authInitialState from '../initialState';
-import { IAuthInitialState, ILoginResponseNormalized } from '../Auth.interface';
+import {IAuthenticationResponse, IAuthInitialState, ILoginResponseNormalized} from '../Auth.interface';
 
 export const loginSuccess = (
 	state: IAuthInitialState,
-	action: IReduxActionResponse<ILoginResponseNormalized>
+	action: IReduxActionResponse<IAuthenticationResponse>
 ) => {
 	const { payload } = action;
 	if (payload) {
-		state = { ...state, isLoading: false, ...payload };
+		state = { ...state, isLoading: false, userDetails: payload };
 	}
 	return state;
 };

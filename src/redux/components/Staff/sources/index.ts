@@ -11,7 +11,7 @@ import LoaderService from 'services/LoaderService';
 import { IPaginationOption } from 'redux/interfaces';
 import ROUTES from "config/constants";
 import {
-	CREATE_STAFF,
+	CREATE_STAFF, GET_STAFF_BY_NAME_LIST,
 	GET_STAFF_DETAIL,
 	GET_STAFF_LIST
 
@@ -24,6 +24,9 @@ import {IStaffCreation} from "../../../../components/pages/StaffCreateOrUpdate/S
 import {prepareRouteForNavigation} from "../../../../utils/Route";
 import NavigationService from "../../../../services/NavigationService";
 import ToastService from "../../../../services/ToastService";
+import {GET_USERS_BY_NAME_LIST, IUserInfo} from "../../User";
+import {normalizeUsersByName} from "../../User/normalizers";
+import {normalizeStaffByName} from "../normalizers";
 
 export const fetchStaff = () => {
 	const client = new GymHttpClient({ dispatchError: false });
@@ -70,3 +73,20 @@ export const createStaff = (staffCreation: IStaffCreation) => async () => {
 		throwErrorToast(e)
 	}
 }
+
+export const fetchStaffByName = (name: string) => async (dispatch: Dispatch<any>) => {
+	const client = new GymHttpClient({ dispatchError: false });
+	try {
+		LoaderService.show();
+		const staffList =  await Promise.resolve(client.get<IStaff[]>(GET_STAFF_BY_NAME_LIST, {
+			params: {
+				name,
+			}
+		}));
+		LoaderService.hide();
+		dispatch(actions.fetchStaffByNameListSuccess(normalizeStaffByName(staffList)));
+	} catch (e) {
+		throwErrorToast(e);
+	}
+}
+

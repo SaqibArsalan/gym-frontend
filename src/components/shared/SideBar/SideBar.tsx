@@ -58,7 +58,7 @@ const Sidebar: React.FC = () => {
 
                     <ListItemButton component={Link} to="/classes">
                         <ListItemIcon><FitnessCenter /></ListItemIcon>
-                        <ListItemText primary="Classes" />
+                        <ListItemText primary="Classes & Attendance" />
                     </ListItemButton>
 
                     <ListItemButton component={Link} to="/payments">

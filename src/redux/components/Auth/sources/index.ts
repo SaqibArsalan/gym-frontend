@@ -2,7 +2,7 @@
 import { Dispatch } from 'react';
 
 import ROUTES from "config/constants";
-import {actions, IRegistration} from '../index';
+import {actions, IAuthenticationResponse, ILoginResponseNormalized, IRegistration} from '../index';
 import {GymHttpClient} from "../../../client";
 import LoaderService from "../../../../services/LoaderService";
 import {throwErrorToast, throwSuccessToast} from "../../../utils/source.helper";
@@ -25,7 +25,7 @@ export const login =
 			const url = `${BASE_URL}/v1/auth/login`;
 			try {
 				LoaderService.show();
-				const userDetails = await client.post<any>(url, {
+				const userDetails: IAuthenticationResponse = await client.post<any>(url, {
 					email: username,
 					password,
 				});

@@ -12,7 +12,7 @@ import { IPaginationOption } from 'redux/interfaces';
 import ROUTES from "config/constants";
 import {
 	CREATE_USER,
-	GET_STAFF_BY_NAME_LIST, GET_USERS_LIST
+	GET_USERS_BY_NAME_LIST, GET_USER_DETAIL, GET_USERS_LIST
 
 } from '../User.constants';
 
@@ -20,7 +20,7 @@ import {
 import {actions, IUserCreateOrUpdate, IUserInfo} from '../index';
 import {normalizeUsersByName} from "../normalizers";
 import {IStaffCreation} from "../../../../components/pages/StaffCreateOrUpdate/StaffInfo/StaffInfo.interface";
-import {CREATE_STAFF} from "../../Staff";
+import {CREATE_STAFF, GET_STAFF_DETAIL, IStaff} from "../../Staff";
 import NavigationService from "../../../../services/NavigationService";
 import {prepareRouteForNavigation} from "../../../../utils/Route";
 
@@ -28,7 +28,7 @@ export const fetchUsersByName = (name: string) => async (dispatch: Dispatch<any>
 	const client = new GymHttpClient({ dispatchError: false });
 	try {
 		LoaderService.show();
-		const users =  await Promise.resolve(client.get<IUserInfo[]>(GET_STAFF_BY_NAME_LIST, {
+		const users =  await Promise.resolve(client.get<IUserInfo[]>(GET_USERS_BY_NAME_LIST, {
 			params: {
 				name,
 			}
@@ -71,6 +71,19 @@ export const createUser = (userCreation: IUserCreateOrUpdate) => async () => {
 	} catch (e) {
 		LoaderService.hide();
 		throwErrorToast(e)
+	}
+}
+
+export const fetchUserDetail = (userId: string) => async (dispatch: Dispatch<any>) => {
+	const client = new GymHttpClient({ dispatchError: false });
+	try {
+		LoaderService.show();
+		const userDetail =  await Promise.resolve(client.get<IUserInfo>(GET_USER_DETAIL.replace("userId", userId)));
+		LoaderService.hide();
+		dispatch(actions.fetchUserDetailsSuccess(userDetail));
+	} catch (e) {
+		LoaderService.hide();
+		throwErrorToast(e);
 	}
 }
 

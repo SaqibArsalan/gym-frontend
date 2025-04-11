@@ -18,6 +18,10 @@ const ROUTES = {
 	STAFF_DETAIL: '/staff-detail',
 	USER_LISTING: '/users',
 	USER_CREATE: '/user-create',
+	USER_DETAIL: '/user-detail',
+	CLASS_LISTING: '/classes',
+	CLASS_CREATE: '/class-create',
+	CLASS_DETAIL: '/class-detail',
 	MODULE_ROOT: '',
 };
 

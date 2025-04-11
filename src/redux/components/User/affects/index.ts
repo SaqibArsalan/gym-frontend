@@ -25,3 +25,14 @@ export const fetchUsersListSuccess = (
 	}
 	return state;
 };
+
+export const fetchUserDetailsSuccess = (
+	state: IUserInitialState,
+	action: IReduxActionResponse<IUserInfo>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, userDetail: payload };
+	}
+	return state;
+}

@@ -3,11 +3,13 @@ import { IReduxAction } from 'redux/interfaces';
 export interface IStaffInitialState {
 	staffList: IStaff[];
 	staffDetail: IStaff | null;
+	staffByNameList: IDropdownResponse[];
 }
 export interface IStaffActions {
 	fetchWarehousesSuccess: IReduxAction<IWarehouse[]>;
 	fetchStaffListSuccess: IReduxAction<IStaff[]>;
 	fetchStaffDetailsSuccess: IReduxAction<IStaff>;
+	fetchStaffByNameListSuccess: IReduxAction<IDropdownResponse[]>;
 }
 
 export interface IWarehouse {
@@ -21,8 +23,14 @@ export interface IWarehouse {
 }
 
 export interface IStaff {
+	id: string;
 	userId: string;
 	name: string;
 	salary: number;
 	hireDate: string;
+}
+
+export interface IDropdownResponse {
+	id: string;
+	name: string;
 }

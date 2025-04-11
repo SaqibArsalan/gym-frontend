@@ -23,7 +23,7 @@ function paths(): IPath {
 	const configs: IPath = {} as any;
 	configs.root = path.resolve(path.join(__dirname), '../');
 	configs.src = path.join(configs.root, 'src');
-	configs.srcIndexEntry = path.join(configs.src, 'index.ts');
+	// configs.srcIndexEntry = path.join(configs.src, 'index.ts');
 	configs.srcScss = path.join(configs.src, 'assets', 'scss');
 	configs.srcScssEntry = path.join(configs.srcScss, 'app.scss');
 	configs.srcScssVendorEntry = path.join(configs.srcScss, 'vendor.scss');

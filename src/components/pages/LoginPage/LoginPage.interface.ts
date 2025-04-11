@@ -1,9 +1,10 @@
 import { IChildModuleInfo } from 'config/interface';
 import React from 'react';
-import { IAuthInitialState } from 'redux/components/Auth';
+import {IAuthenticationResponse, IAuthInitialState} from 'redux/components/Auth';
 
-export interface ILoginPage {
+export interface ILoginPageProps {
 	auth: IAuthInitialState;
+	userDetails: IAuthenticationResponse;
 	// tourNotifications: ITourNotificationResponse[];
 	// tourList: ITour[];
 }

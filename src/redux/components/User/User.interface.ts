@@ -3,10 +3,12 @@ import { IReduxAction } from 'redux/interfaces';
 export interface IUserInitialState {
 	usersByNameList: IUsersDropdown[];
 	usersList: IUserInfo[];
+	userDetail: IUserInfo | null;
 }
 export interface IUserActions {
 	fetchUsersByNameListSuccess: IReduxAction<IUsersDropdown[]>;
 	fetchUsersListSuccess: IReduxAction<IUserInfo[]>;
+	fetchUserDetailsSuccess: IReduxAction<IUserInfo>;
 }
 
 export interface IWarehouse {

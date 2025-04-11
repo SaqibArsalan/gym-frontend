@@ -2,7 +2,7 @@ import { IReduxAction } from 'redux/interfaces';
 
 // Add your new action payload in interface below
 export interface IAuthActions {
-	loginSuccess: IReduxAction<ILoginResponseNormalized>;
+	loginSuccess: IReduxAction<IAuthenticationResponse>;
 	logout: IReduxAction<void>;
 	registrationSuccess: IReduxAction<IRegistration>
 }
@@ -17,6 +17,7 @@ export interface IAuthInitialState {
 	mfa: any | null;
 	isValidateMFASuccess: boolean;
 	roles: string[];
+	userDetails: IAuthenticationResponse | null;
 }
 
 export interface ILoginSuccessPayload {
@@ -76,4 +77,22 @@ export interface IRegistration {
 	dateOfBirth: string;
 	email: string;
 	password: string;
+}
+
+export interface ILoginUserInfoDto {
+	id: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	phoneNumber: string;
+	accountStatus: string;
+}
+
+export interface IAuthenticationResponse {
+	token: string;
+	legacyToken: string;
+	userInfoDto: ILoginUserInfoDto;
+	expiresAt: string;
+	refreshToken: string;
+	roles: string[];
 }

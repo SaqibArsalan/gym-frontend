@@ -11,7 +11,6 @@ import {fetchMemberDetail} from "../../../redux/components/Members/sources";
 
 
 function MemberDetailComponent(props: IMemberDetailProps) {
-    const [activeMembers, setActiveMembers] = useState<number | null>(null);
     const {memberDetail} = props;
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -40,8 +39,8 @@ function MemberDetailComponent(props: IMemberDetailProps) {
                                 separator={<NavigateNextIcon fontSize="small"/>}
                                 aria-label="breadcrumb"
                             >
-                                <Typography>Staff</Typography>
-                                <Typography>Staff Details</Typography>
+                                <Typography>Member</Typography>
+                                <Typography>Member Details</Typography>
                             </Breadcrumbs>
                         </div>
                         <Typography variant="h6" component="div">

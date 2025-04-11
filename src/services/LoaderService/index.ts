@@ -8,7 +8,6 @@ class LoaderService implements ILoaderService {
     }
 
     show = (component: React.FunctionComponent<any> = LoaderComponent, props = {}) => {
-        console.log("came here show");
         document.dispatchEvent(new CustomEvent('showLoader', { detail: { component, props } }));
     }
 
