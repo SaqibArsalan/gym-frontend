@@ -21,7 +21,6 @@ export default function DatePickerComponent(props: IDatePickerComponentProps) {
 	const [value, setValue] = React.useState<Dayjs | null>(
 		defaultValue ? dayjs(defaultValue, defaultDateFormat) : null
 	);
-	const [openDialog, setDialogStatus] = React.useState(false);
 	const handleChange = (newValue: any) => {
 		if (onChange) {
 			const formattedDate = dayjs(newValue).format(
@@ -32,10 +31,6 @@ export default function DatePickerComponent(props: IDatePickerComponentProps) {
 		setValue(newValue);
 	};
 
-	const toggleDialogStatus = () => {
-		setDialogStatus(!openDialog);
-	};
-
 	const additionalProps: any = {};
 	if (forceOpen) {
 		additionalProps.open = true;
@@ -43,15 +38,13 @@ export default function DatePickerComponent(props: IDatePickerComponentProps) {
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
 			<DatePicker
-				open={openDialog}
 				value={value}
-				onClose={() => setDialogStatus(false)}
-				minDate={dayjs().startOf("day")}
 				onChange={handleChange}
 				disabled={isDisabled}
+				minDate={dayjs().startOf("day")}
 				inputFormat={dateFormat || defaultDateFormat}
 				renderInput={(params: TextFieldProps) => (
-					<StyledTextField onClick={toggleDialogStatus} {...params} error={false} />
+					<StyledTextField {...params} error={false} />
 				)}
 				{...additionalProps}
 			/>
