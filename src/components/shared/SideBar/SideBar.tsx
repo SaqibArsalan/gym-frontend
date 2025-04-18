@@ -22,6 +22,7 @@ import styles from "./SideBar.module.scss";
 
 const Sidebar: React.FC = () => {
     const [openSettings, setOpenSettings] = useState(false);
+    const [openClassesAndAttendance, setOpenClassesAndAttendance] = useState(false);
 
     return (
         <Drawer
@@ -56,10 +57,30 @@ const Sidebar: React.FC = () => {
                         <ListItemText primary="Staff" />
                     </ListItemButton>
 
-                    <ListItemButton component={Link} to="/classes">
-                        <ListItemIcon><FitnessCenter /></ListItemIcon>
-                        <ListItemText primary="Classes & Attendance" />
-                    </ListItemButton>
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => setOpenClassesAndAttendance(!openClassesAndAttendance)}>
+                            <ListItemIcon>
+                                <Settings />
+                            </ListItemIcon>
+                            <ListItemText primary="Classes & Attendance" />
+                            {openSettings ? <ExpandLess /> : <ExpandMore />}
+                        </ListItemButton>
+                    </ListItem>
+
+                    {/* Submenu - Settings */}
+                    <Collapse in={openClassesAndAttendance} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItemButton sx={{ pl: 4 }} component={Link} to="/classes">
+                                <ListItemText primary="Classes" />
+                            </ListItemButton>
+                            <ListItemButton sx={{ pl: 4 }} component={Link} to="/sessions">
+                                <ListItemText primary="Sessions" />
+                            </ListItemButton>
+                            <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemText primary="Attendance" />
+                            </ListItemButton>
+                        </List>
+                    </Collapse>
 
                     <ListItemButton component={Link} to="/payments">
                         <ListItemIcon><Payment /></ListItemIcon>

@@ -28,6 +28,14 @@ export const generateRowColumnsForItem = (
 			...defaultBodyColumnsConfigs,
 		};
 
+		if (valueKey === 'joinDate' && result.text !== 'Not available') {
+			result.text = format(new Date(value), 'dd MMMM, yyyy');
+		}
+
+		if (valueKey === 'expiryDate' && result.text !== 'Not available') {
+			result.text = format(new Date(value), 'dd MMMM, yyyy');
+		}
+
 		return result;
 	});
 

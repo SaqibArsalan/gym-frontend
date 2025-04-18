@@ -22,6 +22,9 @@ const ROUTES = {
 	CLASS_LISTING: '/classes',
 	CLASS_CREATE: '/class-create',
 	CLASS_DETAIL: '/class-detail',
+	SESSION_LISTING: '/sessions',
+	SESSION_CREATE: '/session-create',
+	SESSION_DETAIL: '/session-detail',
 	MODULE_ROOT: '',
 };
 

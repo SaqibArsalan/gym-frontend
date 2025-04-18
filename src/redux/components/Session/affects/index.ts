@@ -1,17 +1,17 @@
 import { IReduxActionResponse } from 'redux/interfaces';
 import {
 	ISessionInfo,
-	IGymClassInitialState
-} from '../GymClass.interface';
+	ISessionInitialState
+} from '../Session.interface';
 
 
-export const fetchClassListSuccess = (
-	state: IGymClassInitialState,
+export const fetchSessionListSuccess = (
+	state: ISessionInitialState,
 	action: IReduxActionResponse<ISessionInfo[]>
 ) => {
 	const { payload } = action;
 	if (payload) {
-		state = { ...state, classList: payload};
+		state = { ...state, sessionList: payload};
 	}
 	return state;
 };

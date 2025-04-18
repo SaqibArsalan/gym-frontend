@@ -1,15 +1,15 @@
 import { IReduxAction } from 'redux/interfaces';
 
 export interface IGymClassInitialState {
-	classList: IClassInfo[];
-	classDetails: IClassInfo | null;
+	classList: ISessionInfo[];
+	classDetails: ISessionInfo | null;
 }
 export interface IClassActions {
-	fetchClassListSuccess: IReduxAction<IClassInfo[]>;
-	fetchClassDetailsSuccess: IReduxAction<IClassInfo>;
+	fetchClassListSuccess: IReduxAction<ISessionInfo[]>;
+	fetchClassDetailsSuccess: IReduxAction<ISessionInfo>;
 }
 
-export interface IClassInfo {
+export interface ISessionInfo {
 	id: string;
 	className: string;
 	description: string;

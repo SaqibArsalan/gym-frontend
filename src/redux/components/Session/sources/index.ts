@@ -11,35 +11,35 @@ import LoaderService from 'services/LoaderService';
 import { IPaginationOption } from 'redux/interfaces';
 import ROUTES from "config/constants";
 import {
-	CREATE_CLASS,
-	GET_CLASS_LIST
-} from '../GymClass.constants';
+	CREATE_SESSION,
+	GET_SESSION_LIST
+} from '../Session.constants';
 
 // // Actions
-import {actions, ISessionInfo, ICreateOrUpdateClass} from '../index';
+import {actions, ISessionInfo, ICreateOrUpdateSession} from '../index';
 import NavigationService from "../../../../services/NavigationService";
 import {prepareRouteForNavigation} from "../../../../utils/Route";
 
 
-export const fetchAllClasses = () => async (dispatch: Dispatch<any>) => {
+export const fetchAllSessions = () => async (dispatch: Dispatch<any>) => {
 	const client = new GymHttpClient({ dispatchError: false });
 	try {
 		LoaderService.show();
-		const classList =  await Promise.resolve(client.get<ISessionInfo[]>(GET_CLASS_LIST));
+		const sessionList =  await Promise.resolve(client.get<ISessionInfo[]>(GET_SESSION_LIST));
 		LoaderService.hide();
 
-		dispatch(actions.fetchClassListSuccess(classList));
+		dispatch(actions.fetchSessionListSuccess(sessionList));
 	} catch (e) {
 		throwErrorToast(e);
 	}
 }
 
-export const createClass = (classCreation: ICreateOrUpdateClass) => async () => {
+export const createClass = (classCreation: ICreateOrUpdateSession) => async () => {
 	const client = new GymHttpClient({ dispatchError: false });
 
 	try {
 		LoaderService.show();
-		await client.post<void>(CREATE_CLASS, classCreation);
+		await client.post<void>(CREATE_SESSION, classCreation);
 
 		LoaderService.hide();
 		throwSuccessToast('Class Created');

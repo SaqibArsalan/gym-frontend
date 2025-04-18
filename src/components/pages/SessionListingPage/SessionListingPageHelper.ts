@@ -1,7 +1,8 @@
 import {IDataTableProps, ITableBodyRow,} from 'components/shared/DataTable/DataTable.interface';
 import {format} from 'date-fns';
-import {defaultBodyColumnsConfigs, tableColumnsMap,} from './GymClassPage.configs';
-import {ItableColumnsMap} from './GymClassPage.interface';
+import dayjs from "dayjs";
+import {defaultBodyColumnsConfigs, tableColumnsMap,} from './SessionListingPage.configs';
+import {ItableColumnsMap} from './SessionListingPage.interface';
 import {IMembersSubscriptions} from "../../../redux/components/Members";
 import {ISessionInfo} from "../../../redux/components/Gym Class";
 
@@ -11,7 +12,7 @@ export const generateTableHeaderColumns = () =>
 	}));
 
 export const generateRowColumnsForItem = (
-	item: IMembersSubscriptions,
+	item: ISessionInfo,
 	rowIndex: number
 ) =>
 	tableColumnsMap.map((record: ItableColumnsMap) => {
@@ -23,27 +24,15 @@ export const generateRowColumnsForItem = (
 			...defaultBodyColumnsConfigs,
 		};
 
-		if (valueKey === 'date') {
-			const date: string = (item as any).startTime;
-			if (date) {
-				result.text = format(new Date(date), 'dd MMMM, yyyy');
-			} else {
-				result.text = 'Not available';
-			}
-		}
-
-		if (valueKey === 'startTime' && result.text !== 'Not available') {
-			result.text = format(new Date(value), "hh:mm a");
-		}
-		if (valueKey === 'endTime' && result.text !== 'Not available') {
-			result.text = format(new Date(value), "hh:mm a");
+		if (valueKey === 'sessionDate' && result.text !== 'Not available') {
+			result.text = dayjs(value).format("DD MMMM, YYYY HH:mm:ss");
 		}
 
 		return result;
 	});
 
 export const generateTableData = (
-	classList: ISessionInfo[],
+	sessionList: ISessionInfo[],
 	otherProps: any
 ): IDataTableProps => ({
 	isStickyHeader: true,
@@ -51,8 +40,8 @@ export const generateTableData = (
 		columns: generateTableHeaderColumns(),
 	},
 	body: {
-		rows: classList.map((subscriptions: any, index: number) => ({
-			columns: generateRowColumnsForItem(subscriptions, index),
+		rows: sessionList.map((sessions: ISessionInfo, index: number) => ({
+			columns: generateRowColumnsForItem(sessions, index),
 			onRowClick: otherProps.onRowClick || undefined
 		})) as ITableBodyRow[],
 	},

@@ -1,9 +1,9 @@
 import { IAuthInitialState } from 'redux/components/Auth';
 import {ISessionInfo} from "../../../redux/components/Gym Class";
 
-export interface IGymClassProps {
+export interface ISessionProps {
 	auth: IAuthInitialState;
-	classList: ISessionInfo[];
+	sessionList: ISessionInfo[];
 }
 
 export interface ItableColumnsMap {
