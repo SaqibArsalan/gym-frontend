@@ -1,13 +1,14 @@
 import { IReduxActionResponse } from 'redux/interfaces';
 import {
-	ISessionInfo,
+	IClassResponseInfo,
 	IGymClassInitialState
 } from '../GymClass.interface';
+import {IDropdownResponse} from "../../Staff";
 
 
 export const fetchClassListSuccess = (
 	state: IGymClassInitialState,
-	action: IReduxActionResponse<ISessionInfo[]>
+	action: IReduxActionResponse<IClassResponseInfo[]>
 ) => {
 	const { payload } = action;
 	if (payload) {
@@ -15,6 +16,17 @@ export const fetchClassListSuccess = (
 	}
 	return state;
 };
+
+export const fetchClassForDropdownListSuccess = (
+	state: IGymClassInitialState,
+	action: IReduxActionResponse<IDropdownResponse[]>
+)=> {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, classListForDropdown: payload };
+	}
+	return state;
+}
 
 // export const fetchUserDetailsSuccess = (
 // 	state: IGymClassInitialState,

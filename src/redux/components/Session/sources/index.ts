@@ -19,6 +19,10 @@ import {
 import {actions, ISessionInfo, ICreateOrUpdateSession} from '../index';
 import NavigationService from "../../../../services/NavigationService";
 import {prepareRouteForNavigation} from "../../../../utils/Route";
+import {GET_STAFF_BY_NAME_LIST, IStaff} from "../../Staff";
+import {normalizeStaffByName} from "../../Staff/normalizers";
+import {normalizeClassesForDropdown} from "../normalizers";
+import {GET_CLASS_FOR_DROPDOWN} from "../../Gym Class";
 
 
 export const fetchAllSessions = () => async (dispatch: Dispatch<any>) => {
@@ -34,19 +38,19 @@ export const fetchAllSessions = () => async (dispatch: Dispatch<any>) => {
 	}
 }
 
-export const createClass = (classCreation: ICreateOrUpdateSession) => async () => {
+export const createSession = (classCreation: ICreateOrUpdateSession, classId: string) => async () => {
 	const client = new GymHttpClient({ dispatchError: false });
 
 	try {
 		LoaderService.show();
-		await client.post<void>(CREATE_SESSION, classCreation);
+		await client.post<void>(CREATE_SESSION.replace("classId", classId), classCreation);
 
 		LoaderService.hide();
-		throwSuccessToast('Class Created');
+		throwSuccessToast('Session Created');
 
 		setTimeout(() => {
 			LoaderService.hide();
-			NavigationService.navigate(prepareRouteForNavigation(ROUTES.CLASS_LISTING));
+			NavigationService.navigate(prepareRouteForNavigation(ROUTES.SESSION_LISTING));
 		}, 1000);
 
 	} catch (e) {

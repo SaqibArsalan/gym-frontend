@@ -7,3 +7,4 @@ export const reducerName = 'gymClass';
 export const GET_CLASS_LIST = `${BASE_URL}/v1/classes`;
 export const GET_CLASS_DETAIL = `${BASE_URL}/v1/classes/userId`;
 export const CREATE_CLASS = `${BASE_URL}/v1/classes`;
+export const GET_CLASS_FOR_DROPDOWN = `${BASE_URL}/v1/classes/search`;

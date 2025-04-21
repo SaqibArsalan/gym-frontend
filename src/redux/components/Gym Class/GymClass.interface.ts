@@ -1,15 +1,18 @@
 import { IReduxAction } from 'redux/interfaces';
+import {IDropdownResponse} from "../Staff";
 
 export interface IGymClassInitialState {
-	classList: ISessionInfo[];
-	classDetails: ISessionInfo | null;
+	classList: IClassResponseInfo[];
+	classDetails: IClassResponseInfo | null;
+	classListForDropdown: IDropdownResponse[] | null;
 }
 export interface IClassActions {
-	fetchClassListSuccess: IReduxAction<ISessionInfo[]>;
-	fetchClassDetailsSuccess: IReduxAction<ISessionInfo>;
+	fetchClassListSuccess: IReduxAction<IClassResponseInfo[]>;
+	fetchClassDetailsSuccess: IReduxAction<IClassResponseInfo>;
+	fetchClassForDropdownListSuccess: IReduxAction<IDropdownResponse[]>;
 }
 
-export interface ISessionInfo {
+export interface IClassResponseInfo {
 	id: string;
 	className: string;
 	description: string;

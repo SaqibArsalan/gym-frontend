@@ -19,8 +19,7 @@ export interface ISessionInfo {
 }
 
 export interface ICreateOrUpdateSession {
-	className: string;
-	description: string;
+	classId: string;
 	trainerId: string;
 	capacity: number;
 	sessionDate: string;

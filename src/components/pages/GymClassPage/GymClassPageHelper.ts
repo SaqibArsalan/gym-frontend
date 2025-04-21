@@ -3,7 +3,7 @@ import {format} from 'date-fns';
 import {defaultBodyColumnsConfigs, tableColumnsMap,} from './GymClassPage.configs';
 import {ItableColumnsMap} from './GymClassPage.interface';
 import {IMembersSubscriptions} from "../../../redux/components/Members";
-import {ISessionInfo} from "../../../redux/components/Gym Class";
+import {IClassResponseInfo} from "../../../redux/components/Gym Class";
 
 export const generateTableHeaderColumns = () =>
 	tableColumnsMap.map((record: ItableColumnsMap) => ({
@@ -43,7 +43,7 @@ export const generateRowColumnsForItem = (
 	});
 
 export const generateTableData = (
-	classList: ISessionInfo[],
+	classList: IClassResponseInfo[],
 	otherProps: any
 ): IDataTableProps => ({
 	isStickyHeader: true,

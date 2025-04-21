@@ -11,21 +11,23 @@ import LoaderService from 'services/LoaderService';
 import { IPaginationOption } from 'redux/interfaces';
 import ROUTES from "config/constants";
 import {
-	CREATE_CLASS,
+	CREATE_CLASS, GET_CLASS_FOR_DROPDOWN,
 	GET_CLASS_LIST
 } from '../GymClass.constants';
 
 // // Actions
-import {actions, ISessionInfo, ICreateOrUpdateClass} from '../index';
+import {actions, IClassResponseInfo, ICreateOrUpdateClass} from '../index';
 import NavigationService from "../../../../services/NavigationService";
 import {prepareRouteForNavigation} from "../../../../utils/Route";
+import {normalizeClassesForDropdown} from "../../Session/normalizers";
+import {IDropdownResponse, IStaff} from "../../Staff";
 
 
 export const fetchAllClasses = () => async (dispatch: Dispatch<any>) => {
 	const client = new GymHttpClient({ dispatchError: false });
 	try {
 		LoaderService.show();
-		const classList =  await Promise.resolve(client.get<ISessionInfo[]>(GET_CLASS_LIST));
+		const classList =  await Promise.resolve(client.get<IClassResponseInfo[]>(GET_CLASS_LIST));
 		LoaderService.hide();
 
 		dispatch(actions.fetchClassListSuccess(classList));
@@ -52,6 +54,24 @@ export const createClass = (classCreation: ICreateOrUpdateClass) => async () => 
 	} catch (e) {
 		LoaderService.hide();
 		throwErrorToast(e)
+	}
+}
+
+export const fetchClassesForDropdown = (name: string) => async (dispatch: Dispatch<any>) => {
+	const client = new GymHttpClient({ dispatchError: false });
+	try {
+		LoaderService.show();
+		const classList =  await Promise.resolve(client.get<IClassResponseInfo[]>(GET_CLASS_FOR_DROPDOWN, {
+			params: {
+				name,
+			}
+		}));
+		LoaderService.hide();
+
+		dispatch(actions.fetchClassForDropdownListSuccess(normalizeClassesForDropdown(classList)));
+	} catch (e) {
+		LoaderService.hide();
+		throwErrorToast(e);
 	}
 }
 

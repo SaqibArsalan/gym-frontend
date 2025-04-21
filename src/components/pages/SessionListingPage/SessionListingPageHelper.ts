@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import {defaultBodyColumnsConfigs, tableColumnsMap,} from './SessionListingPage.configs';
 import {ItableColumnsMap} from './SessionListingPage.interface';
 import {IMembersSubscriptions} from "../../../redux/components/Members";
-import {ISessionInfo} from "../../../redux/components/Gym Class";
+import {IClassResponseInfo} from "../../../redux/components/Gym Class";
 
 export const generateTableHeaderColumns = () =>
 	tableColumnsMap.map((record: ItableColumnsMap) => ({
@@ -12,7 +12,7 @@ export const generateTableHeaderColumns = () =>
 	}));
 
 export const generateRowColumnsForItem = (
-	item: ISessionInfo,
+	item: IClassResponseInfo,
 	rowIndex: number
 ) =>
 	tableColumnsMap.map((record: ItableColumnsMap) => {
@@ -32,7 +32,7 @@ export const generateRowColumnsForItem = (
 	});
 
 export const generateTableData = (
-	sessionList: ISessionInfo[],
+	sessionList: IClassResponseInfo[],
 	otherProps: any
 ): IDataTableProps => ({
 	isStickyHeader: true,
@@ -40,7 +40,7 @@ export const generateTableData = (
 		columns: generateTableHeaderColumns(),
 	},
 	body: {
-		rows: sessionList.map((sessions: ISessionInfo, index: number) => ({
+		rows: sessionList.map((sessions: IClassResponseInfo, index: number) => ({
 			columns: generateRowColumnsForItem(sessions, index),
 			onRowClick: otherProps.onRowClick || undefined
 		})) as ITableBodyRow[],

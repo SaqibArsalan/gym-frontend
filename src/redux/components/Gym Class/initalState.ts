@@ -3,7 +3,8 @@ import {IGymClassInitialState} from './GymClass.interface';
 
 const classInitialState: IGymClassInitialState = {
 	classList: [],
-	classDetails: null
+	classDetails: null,
+	classListForDropdown: []
 };
 
 export default classInitialState;
