@@ -6,9 +6,10 @@ import * as Staff from "./components/Staff";
 import * as User from "./components/User";
 import * as GymClass from "./components/Gym Class";
 import * as Session from "./components/Session";
+import * as Chat from "./components/Chat";
 
 // add modules here after import to register reducers
-const modules = [Auth, Miscellaneous, Members, Staff, User, GymClass, Session];
+const modules = [Auth, Miscellaneous, Members, Staff, User, GymClass, Session, Chat];
 
 const rootReducer = combineReducers(
 	modules.reduce((reducersObject: any, module) => {
@@ -26,6 +27,7 @@ export interface IRootState {
 	[User.reducerName]: User.IUserInitialState;
 	[GymClass.reducerName]: GymClass.IGymClassInitialState;
 	[Session.reducerName]: Session.ISessionInitialState;
+	[Chat.reducerName]: Chat.IChatInitialState;
 }
 
 export default rootReducer;

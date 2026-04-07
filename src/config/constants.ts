@@ -25,6 +25,7 @@ const ROUTES = {
 	SESSION_LISTING: '/sessions',
 	SESSION_CREATE: '/session-create',
 	SESSION_DETAIL: '/session-detail',
+	AI_CHAT: '/chat',
 	MODULE_ROOT: '',
 };
 

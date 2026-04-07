@@ -31,6 +31,7 @@ import GymClassPage from "../components/pages/GymClassPage/GymClassPage";
 import ClassCreateOrUpdate from "../components/pages/ClassCreateOrUpdate/ClassCreateOrUpdate";
 import SessionListingPage from "../components/pages/SessionListingPage/SessionListingPage";
 import SessionCreateOrUpdate from "../components/pages/SessionCreateOrUpdate/SessionCreateOrUpdate";
+import ChatPage from "../components/pages/ChatPage/ChatPage";
 
 // const isMicroBuild = Boolean(process.env.MICRO_BUILD);
 
@@ -57,8 +58,9 @@ const RootRoute = (props: { store: Store; mainTheme?: Theme }) => {
 					<Route path={`${ROUTES.MEMBER_CREATE}`} element={<MemberCreateOrUpdate />} />
 					<Route path={`${ROUTES.CLASS_LISTING}`} element={<GymClassPage />} />
 					<Route path={`${ROUTES.CLASS_CREATE}`} element={<ClassCreateOrUpdate />} />
-					<Route path={`${ROUTES.SESSION_LISTING}`} element={<SessionListingPage />} />
-					<Route path={`${ROUTES.SESSION_CREATE}`} element={<SessionCreateOrUpdate />} />
+				<Route path={`${ROUTES.SESSION_LISTING}`} element={<SessionListingPage />} />
+				<Route path={`${ROUTES.SESSION_CREATE}`} element={<SessionCreateOrUpdate />} />
+				<Route path={`${ROUTES.AI_CHAT}`} element={<ChatPage />} />
 					<Route
 						path={`${ROUTES.STAFF_DETAIL}/:userId`}
 						element={<StaffDetail />}

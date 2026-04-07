@@ -15,7 +15,7 @@ import {
     Settings,
     ExpandLess,
     ExpandMore,
-    Logout, Group, FitnessCenter, CardMembership, Payment,
+    Logout, Group, FitnessCenter, CardMembership, Payment, ChatBubbleOutline,
 } from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import styles from "./SideBar.module.scss";
@@ -85,6 +85,12 @@ const Sidebar: React.FC = () => {
                     <ListItemButton component={Link} to="/payments">
                         <ListItemIcon><Payment /></ListItemIcon>
                         <ListItemText primary="Payments" />
+                    </ListItemButton>
+
+                    {/* AI Chat */}
+                    <ListItemButton component={Link} to="/chat">
+                        <ListItemIcon><ChatBubbleOutline /></ListItemIcon>
+                        <ListItemText primary="AI Chat" />
                     </ListItemButton>
 
                     {/* Settings (Collapsible) */}
