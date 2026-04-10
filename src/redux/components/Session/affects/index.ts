@@ -3,6 +3,7 @@ import {
 	ISessionInfo,
 	ISessionInitialState
 } from '../Session.interface';
+import { IDropdownResponse } from '../../Staff';
 
 
 export const fetchSessionListSuccess = (
@@ -12,6 +13,17 @@ export const fetchSessionListSuccess = (
 	const { payload } = action;
 	if (payload) {
 		state = { ...state, sessionList: payload};
+	}
+	return state;
+};
+
+export const fetchSessionListForDropdownSuccess = (
+	state: ISessionInitialState,
+	action: IReduxActionResponse<IDropdownResponse[]>
+) => {
+	const { payload } = action;
+	if (payload) {
+		state = { ...state, sessionListForDropdown: payload };
 	}
 	return state;
 };

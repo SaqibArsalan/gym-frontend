@@ -1,16 +1,15 @@
-import React, { useEffect, useCallback, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useCallback } from "react";
+import { Button, Box } from "@mui/material";
 import "./SessionListingPage.css";
 import {useDispatch} from "react-redux";
 import { prepareRouteForNavigation } from 'utils/Route';
 import ROUTES from "config/constants";
-import {useNavigate} from "react-router-dom"; // Add styles
+import {useNavigate} from "react-router-dom";
 import {ISessionProps} from "./SessionListingPage.interface";
 import SessionListingPageConnector from "./SessionListingPageConnector";
 import DataTable from "../../shared/DataTable/DataTable";
-import {IDataTableProps, ITableBodyRow} from "../../shared/DataTable/DataTable.interface";
+import {IDataTableProps} from "../../shared/DataTable/DataTable.interface";
 import {generateTableData} from "./SessionListingPageHelper";
-import {fetchAllClasses} from "../../../redux/components/Gym Class/sources";
 import {fetchAllSessions} from "../../../redux/components/Session/sources";
 
 function SessionListing(props: ISessionProps) {
@@ -22,23 +21,15 @@ function SessionListing(props: ISessionProps) {
         dispatch(fetchAllSessions());
     }, []);
 
-    const navigateToSessionDetail = useCallback((classId: string) => {
-        const route = prepareRouteForNavigation(ROUTES.SESSION_DETAIL);
-        navigate(`${route}/${classId}`, { replace: true });
-    }, []);
-
     const navigateToSessionCreation = useCallback(() => {
         const route = prepareRouteForNavigation(ROUTES.SESSION_CREATE);
         navigate(route, { replace: true });
     }, []);
 
-    const openSessionDetail = (value: ITableBodyRow) => {
-        const { rowIndex } = value;
-        if (rowIndex !== undefined) {
-            const { id } = sessionList[rowIndex];
-            navigateToSessionDetail(id);
-        }
-    };
+    const navigateToEnrollMember = useCallback(() => {
+        const route = prepareRouteForNavigation(ROUTES.ENROLL_MEMBER);
+        navigate(route, { replace: true });
+    }, []);
 
     const tableProps: IDataTableProps = generateTableData(
         sessionList || [], {
@@ -48,17 +39,21 @@ function SessionListing(props: ISessionProps) {
                 placeholder: 'Search Session',
                 showAddButton: true,
                 onAddButtonClick: navigateToSessionCreation,
-                },
-            // onRowClick: openSessionDetail,
+            },
         }
     );
 
     return (
         <div>
+            <Box display="flex" justifyContent="flex-end" mb={1}>
+                <Button variant="contained" color="secondary" onClick={navigateToEnrollMember}>
+                    Enroll Member
+                </Button>
+            </Box>
             <DataTable {...tableProps} containerStyles={{ height: '500px'}} />
         </div>
     );
-};
+}
 
 const SessionListingPage = SessionListingPageConnector(SessionListing)
 export default SessionListingPage;

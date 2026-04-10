@@ -7,8 +7,6 @@ import {throwErrorToast, throwSuccessToast} from 'redux/utils/source.helper';
 
 import LoaderService from 'services/LoaderService';
 
-// // Interfaces
-import { IPaginationOption } from 'redux/interfaces';
 import ROUTES from "config/constants";
 import {
 	CREATE_SESSION,
@@ -17,12 +15,9 @@ import {
 
 // // Actions
 import {actions, ISessionInfo, ICreateOrUpdateSession} from '../index';
+import {normalizeSessionsForDropdown} from "../normalizers";
 import NavigationService from "../../../../services/NavigationService";
 import {prepareRouteForNavigation} from "../../../../utils/Route";
-import {GET_STAFF_BY_NAME_LIST, IStaff} from "../../Staff";
-import {normalizeStaffByName} from "../../Staff/normalizers";
-import {normalizeClassesForDropdown} from "../normalizers";
-import {GET_CLASS_FOR_DROPDOWN} from "../../Gym Class";
 
 
 export const fetchAllSessions = () => async (dispatch: Dispatch<any>) => {
@@ -33,6 +28,16 @@ export const fetchAllSessions = () => async (dispatch: Dispatch<any>) => {
 		LoaderService.hide();
 
 		dispatch(actions.fetchSessionListSuccess(sessionList));
+	} catch (e) {
+		throwErrorToast(e);
+	}
+}
+
+export const fetchSessionsForDropdown = () => async (dispatch: Dispatch<any>) => {
+	const client = new GymHttpClient({ dispatchError: false });
+	try {
+		const sessionList = await Promise.resolve(client.get<ISessionInfo[]>(GET_SESSION_LIST));
+		dispatch(actions.fetchSessionListForDropdownSuccess(normalizeSessionsForDropdown(sessionList)));
 	} catch (e) {
 		throwErrorToast(e);
 	}
@@ -71,4 +76,3 @@ export const createSession = (classCreation: ICreateOrUpdateSession, classId: st
 // 		throwErrorToast(e);
 // 	}
 // }
-
