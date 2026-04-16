@@ -33,6 +33,7 @@ import SessionListingPage from "../components/pages/SessionListingPage/SessionLi
 import SessionCreateOrUpdate from "../components/pages/SessionCreateOrUpdate/SessionCreateOrUpdate";
 import EnrollMemberPage from "../components/pages/EnrollMemberPage/EnrollMemberPage";
 import ChatPage from "../components/pages/ChatPage/ChatPage";
+import AttendancePage from "../components/pages/AttendancePage/AttendancePage";
 
 // const isMicroBuild = Boolean(process.env.MICRO_BUILD);
 
@@ -62,6 +63,7 @@ const RootRoute = (props: { store: Store; mainTheme?: Theme }) => {
 				<Route path={`${ROUTES.SESSION_LISTING}`} element={<SessionListingPage />} />
 				<Route path={`${ROUTES.SESSION_CREATE}`} element={<SessionCreateOrUpdate />} />
 				<Route path={`${ROUTES.ENROLL_MEMBER}`} element={<EnrollMemberPage />} />
+				<Route path={`${ROUTES.ATTENDANCE}`} element={<AttendancePage />} />
 				<Route path={`${ROUTES.AI_CHAT}`} element={<ChatPage />} />
 					<Route
 						path={`${ROUTES.STAFF_DETAIL}/:userId`}

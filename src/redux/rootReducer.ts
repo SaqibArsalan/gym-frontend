@@ -8,9 +8,10 @@ import * as GymClass from "./components/Gym Class";
 import * as Session from "./components/Session";
 import * as Chat from "./components/Chat";
 import * as Enrollment from "./components/Enrollment";
+import * as Attendance from "./components/Attendance";
 
 // add modules here after import to register reducers
-const modules = [Auth, Miscellaneous, Members, Staff, User, GymClass, Session, Chat, Enrollment];
+const modules = [Auth, Miscellaneous, Members, Staff, User, GymClass, Session, Chat, Enrollment, Attendance];
 
 const rootReducer = combineReducers(
 	modules.reduce((reducersObject: any, module) => {
@@ -30,6 +31,7 @@ export interface IRootState {
 	[Session.reducerName]: Session.ISessionInitialState;
 	[Chat.reducerName]: Chat.IChatInitialState;
 	[Enrollment.reducerName]: Enrollment.IEnrollmentInitialState;
+	[Attendance.reducerName]: Attendance.IAttendanceInitialState;
 }
 
 export default rootReducer;

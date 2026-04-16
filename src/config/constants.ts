@@ -26,6 +26,7 @@ const ROUTES = {
 	SESSION_CREATE: '/session-create',
 	SESSION_DETAIL: '/session-detail',
 	ENROLL_MEMBER: '/enroll-member',
+	ATTENDANCE: '/attendance',
 	AI_CHAT: '/chat',
 	MODULE_ROOT: '',
 };

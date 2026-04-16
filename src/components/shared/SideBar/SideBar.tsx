@@ -76,7 +76,7 @@ const Sidebar: React.FC = () => {
                             <ListItemButton sx={{ pl: 4 }} component={Link} to="/sessions">
                                 <ListItemText primary="Sessions" />
                             </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4 }} component={Link} to="/attendance">
                                 <ListItemText primary="Attendance" />
                             </ListItemButton>
                         </List>
