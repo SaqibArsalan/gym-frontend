@@ -8,6 +8,10 @@ import {
 	DialogContent,
 	DialogTitle,
 	Divider,
+	FormControl,
+	InputLabel,
+	MenuItem,
+	Select,
 	Stack,
 	TextField,
 	Typography,
@@ -24,44 +28,62 @@ import {
 	fetchTodayStats,
 	fetchVisitsByDate,
 } from 'redux/components/Attendance/sources';
-import { fetchMembersSubscriptions } from 'redux/components/Members/sources';
+import { fetchAllUsers } from 'redux/components/User/sources';
 import { throwErrorToast } from 'redux/utils/source.helper';
-import { ICheckInPayload } from 'redux/components/Attendance';
+import { AttendeeType, ICheckInPayload } from 'redux/components/Attendance';
 import { generateTableData } from './AttendancePage.helper';
 import { IAttendancePageProps } from './AttendancePage.interface';
 import AttendancePageConnector from './AttendancePageConnector';
 import './AttendancePage.css';
 
+const ATTENDEE_TYPE_OPTIONS: { label: string; value: AttendeeType }[] = [
+	{ label: 'Member', value: 'MEMBER' },
+	{ label: 'Staff', value: 'STAFF' },
+];
+
 function AttendanceComponent(props: IAttendancePageProps) {
-	const { visits, todayStats, membersForDropdown } = props;
+	const { visits, todayStats, usersForDropdown } = props;
 	const dispatch = useDispatch();
 
 	const today = format(new Date(), 'yyyy-MM-dd');
 	const [selectedDate, setSelectedDate] = useState<string>(today);
 	const [dialogOpen, setDialogOpen] = useState(false);
+	const [attendeeType, setAttendeeType] = useState<AttendeeType>('MEMBER');
+
 	const checkInPayload = useRef<ICheckInPayload>({
 		userId: '',
-		membershipId: '',
 		attendeeType: 'MEMBER',
 		markedBy: 'ADMIN',
-		notes: ''
+		notes: '',
 	});
 
 	useEffect(() => {
 		dispatch(fetchTodayStats());
-		dispatch(fetchMembersSubscriptions());
+		dispatch(fetchAllUsers());
 	}, []);
 
 	useEffect(() => {
 		dispatch(fetchVisitsByDate(selectedDate));
 	}, [selectedDate]);
 
+	const onDialogOpen = () => {
+		setAttendeeType('MEMBER');
+		checkInPayload.current = { userId: '', attendeeType: 'MEMBER', markedBy: 'ADMIN', notes: '' };
+		setDialogOpen(true);
+	};
+
 	const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedDate(e.target.value);
 	};
 
-	const onMemberSelect = (fieldKey: string, value: any) => {
-		checkInPayload.current.membershipId = value ? value.id : '';
+	const onAttendeeTypeChange = (value: AttendeeType) => {
+		setAttendeeType(value);
+		checkInPayload.current.attendeeType = value;
+		checkInPayload.current.userId = '';
+	};
+
+	const onUserSelect = (fieldKey: string, value: any) => {
+		checkInPayload.current.userId = value ? value.id : '';
 	};
 
 	const onNotesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,34 +91,33 @@ function AttendanceComponent(props: IAttendancePageProps) {
 	};
 
 	const onCheckInSubmit = () => {
-		if (!checkInPayload.current.membershipId) {
-			throwErrorToast({ statusText: 'Please select a member' });
+		if (!checkInPayload.current.userId) {
+			throwErrorToast({ statusText: 'Please select a user' });
 			return;
 		}
 		dispatch(checkIn(checkInPayload.current));
 		setDialogOpen(false);
-		checkInPayload.current = { membershipId: '', markedBy: 'admin' };
 	};
 
 	const onCheckOut = (visitId: string) => {
 		dispatch(checkOut(visitId));
 	};
 
-	const memberAutoCompleteProps: IAutoCompleteComponentProps = {
-		key: 'member-checkin-autocomplete',
-		label: 'MEMBER',
+	const userAutoCompleteProps: IAutoCompleteComponentProps = {
+		key: `checkin-autocomplete-${attendeeType}`,
+		label: attendeeType === 'MEMBER' ? 'MEMBER' : 'STAFF',
 		placeholder: 'eg: John Doe',
-		fieldKey: 'membershipId',
+		fieldKey: 'userId',
 		isAsync: false,
-		options: membersForDropdown,
+		options: usersForDropdown,
 		defaultValue: { id: '', name: '' },
-		onSelection: onMemberSelect,
+		onSelection: onUserSelect,
 	};
 
-	const tableProps = generateTableData(visits, onCheckOut, {
+	const tableProps = generateTableData(visits, onCheckOut, usersForDropdown, {
 		showSearchBar: true,
 		showLoadMore: false,
-		searchBarProps: { placeholder: 'Search member...' },
+		searchBarProps: { placeholder: 'Search user...' },
 	});
 
 	return (
@@ -125,9 +146,9 @@ function AttendanceComponent(props: IAttendancePageProps) {
 					variant="contained"
 					color="primary"
 					startIcon={<LoginIcon />}
-					onClick={() => setDialogOpen(true)}
+					onClick={onDialogOpen}
 				>
-					Check In Member
+					Check In User
 				</Button>
 			</Box>
 
@@ -137,16 +158,27 @@ function AttendanceComponent(props: IAttendancePageProps) {
 			<DataTable {...tableProps} containerStyles={{ height: '480px' }} />
 
 			{/* Check-In Dialog */}
-			<Dialog
-				open={dialogOpen}
-				onClose={() => setDialogOpen(false)}
-				maxWidth="sm"
-				fullWidth
-			>
-				<DialogTitle>Check In Member</DialogTitle>
+			<Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
+				<DialogTitle>Check In User</DialogTitle>
 				<DialogContent>
 					<Stack spacing={3} mt={1}>
-						<AutoCompleteComponent {...memberAutoCompleteProps} />
+						<FormControl size="small" fullWidth>
+							<InputLabel>Attendee Type</InputLabel>
+							<Select
+								value={attendeeType}
+								label="Attendee Type"
+								onChange={(e) => onAttendeeTypeChange(e.target.value as AttendeeType)}
+							>
+								{ATTENDEE_TYPE_OPTIONS.map((opt) => (
+									<MenuItem key={opt.value} value={opt.value}>
+										{opt.label}
+									</MenuItem>
+								))}
+							</Select>
+						</FormControl>
+
+						<AutoCompleteComponent {...userAutoCompleteProps} />
+
 						<TextField
 							label="Notes (optional)"
 							placeholder="eg: Guest pass, trainer session..."
@@ -171,5 +203,4 @@ function AttendanceComponent(props: IAttendancePageProps) {
 
 const AttendancePage = AttendancePageConnector(AttendanceComponent);
 export default AttendancePage;
-
 

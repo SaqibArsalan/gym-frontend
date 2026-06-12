@@ -3,15 +3,16 @@ import { Button, Chip, Typography } from '@mui/material';
 import { format } from 'date-fns';
 import { IDataTableProps, ITableBodyRow } from 'components/shared/DataTable/DataTable.interface';
 import { IGymVisit } from 'redux/components/Attendance';
+import { IUsersDropdown } from 'redux/components/User';
 import { tableColumnsMap, defaultBodyColumnsConfigs } from './AttendancePage.configs';
 import { ItableColumnsMap } from './AttendancePage.interface';
 
 // ── Inline cell components ────────────────────────────────────────────────────
 
-export const AttendanceStatusChip: React.FC<{ checkOutAt: string | null }> = ({
-	checkOutAt,
+export const AttendanceStatusChip: React.FC<{ checkOutTime: string | null }> = ({
+	checkOutTime,
 }) => {
-	if (checkOutAt) {
+	if (checkOutTime) {
 		return <Chip label="Left" size="small" variant="outlined" color="default" />;
 	}
 	return <Chip label="Inside" size="small" color="success" />;
@@ -19,10 +20,10 @@ export const AttendanceStatusChip: React.FC<{ checkOutAt: string | null }> = ({
 
 export const CheckOutButton: React.FC<{
 	visitId: string;
-	checkOutAt: string | null;
+	checkOutTime: string | null;
 	onCheckOut: (id: string) => void;
-}> = ({ visitId, checkOutAt, onCheckOut }) => {
-	if (checkOutAt) {
+}> = ({ visitId, checkOutTime, onCheckOut }) => {
+	if (checkOutTime) {
 		return (
 			<Typography variant="caption" color="text.secondary">
 				—
@@ -60,16 +61,24 @@ export const generateTableHeaderColumns = () =>
 
 export const generateRowColumnsForItem = (
 	item: IGymVisit,
-	onCheckOut: (id: string) => void
+	onCheckOut: (id: string) => void,
+	usersMap: Record<string, string>
 ) =>
 	tableColumnsMap.map((record: ItableColumnsMap) => {
 		const { valueKey } = record;
+
+		if (valueKey === 'memberName') {
+			return {
+				...defaultBodyColumnsConfigs,
+				text: usersMap[item.userId] || item.userId,
+			};
+		}
 
 		if (valueKey === 'status') {
 			return {
 				...defaultBodyColumnsConfigs,
 				component: AttendanceStatusChip,
-				componentProps: { checkOutAt: item.checkOutAt },
+				componentProps: { checkOutTime: item.checkOutTime },
 			};
 		}
 
@@ -79,18 +88,18 @@ export const generateRowColumnsForItem = (
 				component: CheckOutButton,
 				componentProps: {
 					visitId: item.id,
-					checkOutAt: item.checkOutAt,
+					checkOutTime: item.checkOutTime,
 					onCheckOut,
 				},
 			};
 		}
 
 		if (valueKey === 'checkInAt') {
-			return { ...defaultBodyColumnsConfigs, text: formatTime(item.checkInAt) };
+			return { ...defaultBodyColumnsConfigs, text: formatTime(item.checkInTime) };
 		}
 
 		if (valueKey === 'checkOutAt') {
-			return { ...defaultBodyColumnsConfigs, text: formatTime(item.checkOutAt) };
+			return { ...defaultBodyColumnsConfigs, text: formatTime(item.checkOutTime) };
 		}
 
 		return {
@@ -102,16 +111,24 @@ export const generateRowColumnsForItem = (
 export const generateTableData = (
 	visits: IGymVisit[],
 	onCheckOut: (id: string) => void,
+	usersForDropdown: IUsersDropdown[],
 	otherProps: any
-): IDataTableProps => ({
-	isStickyHeader: true,
-	header: { columns: generateTableHeaderColumns() },
-	body: {
-		rows: visits.map((visit, index) => ({
-			columns: generateRowColumnsForItem(visit, onCheckOut),
-			rowIndex: index,
-		})) as ITableBodyRow[],
-	},
-	...otherProps,
-});
+): IDataTableProps => {
+	const usersMap: Record<string, string> = {};
+	usersForDropdown.forEach((u) => {
+		usersMap[u.id] = u.name;
+	});
+
+	return {
+		isStickyHeader: true,
+		header: { columns: generateTableHeaderColumns() },
+		body: {
+			rows: visits.map((visit, index) => ({
+				columns: generateRowColumnsForItem(visit, onCheckOut, usersMap),
+				rowIndex: index,
+			})) as ITableBodyRow[],
+		},
+		...otherProps,
+	};
+};
 

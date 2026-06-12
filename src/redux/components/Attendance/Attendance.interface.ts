@@ -1,6 +1,7 @@
 import { IReduxAction } from 'redux/interfaces';
 
 export type MarkedBy = 'ADMIN' | 'SELF';
+export type AttendeeType = 'MEMBER' | 'STAFF';
 
 export interface IAttendanceInitialState {
 	visits: IGymVisit[];
@@ -16,10 +17,10 @@ export interface IAttendanceActions {
 
 export interface IGymVisit {
 	id: string;
-	membershipId: string;
-	memberName: string;
-	checkInAt: string;
-	checkOutAt: string | null;
+	userId: string;
+	attendeeType: AttendeeType;
+	checkInTime: string;
+	checkOutTime: string | null;
 	markedBy: MarkedBy;
 	notes?: string;
 }
@@ -31,9 +32,7 @@ export interface IAttendanceTodayStats {
 
 export interface ICheckInPayload {
 	userId: string;
-	membershipId: string;
-	attendeeType: string;
+	attendeeType: AttendeeType;
 	markedBy: MarkedBy;
 	notes?: string;
 }
-

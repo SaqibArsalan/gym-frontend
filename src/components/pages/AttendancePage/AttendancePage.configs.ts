@@ -1,7 +1,8 @@
 import { ItableColumnsMap } from './AttendancePage.interface';
 
 export const tableColumnsMap: ItableColumnsMap[] = [
-	{ headerTitle: 'Member Name', valueKey: 'memberName' },
+	{ headerTitle: 'User Name', valueKey: 'memberName' },
+	{ headerTitle: 'Attendee Type', valueKey: 'attendeeType' },
 	{ headerTitle: 'Checked In', valueKey: 'checkInAt' },
 	{ headerTitle: 'Checked Out', valueKey: 'checkOutAt' },
 	{ headerTitle: 'Status', valueKey: 'status' },
@@ -11,7 +12,6 @@ export const tableColumnsMap: ItableColumnsMap[] = [
 export const defaultBodyColumnsConfigs = {
 	tableCellProps: {
 		align: 'left' as const,
-		sx: { width: '18%' },
+		sx: { width: '16%' },
 	},
 };
-
