@@ -11,6 +11,7 @@ import {IUsersDropdown} from "../../../../redux/components/User";
 export interface IStaffInfoProps extends IStepComponentProps {
 	usersByNameList: IUsersDropdown[];
 	staffCreationPayload: IStaffCreation;
+	isEditMode?: boolean;
 }
 
 export interface ItableColumnsMap {

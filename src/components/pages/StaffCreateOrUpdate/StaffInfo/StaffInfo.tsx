@@ -18,7 +18,7 @@ import {fetchUsersByName} from "../../../../redux/components/User/sources";
 
 function StaffInfo(props: IStaffInfoProps) {
     const [activeMembers, setActiveMembers] = useState<number | null>(null);
-    const {staffCreationPayload, usersByNameList, onContinue, ...rest} = props;
+    const {staffCreationPayload, usersByNameList, onContinue, isEditMode, ...rest} = props;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
@@ -81,9 +81,11 @@ function StaffInfo(props: IStaffInfoProps) {
                     </Box>
                     <Divider />
                     <Stack spacing={5}>
-                        <FieldWrapperComponent heading='User' subHeading='Select User'>
-                            <AutoCompleteComponent {...userProps} />
-                        </FieldWrapperComponent>
+                        {!isEditMode && (
+                            <FieldWrapperComponent heading='User' subHeading='Select User'>
+                                <AutoCompleteComponent {...userProps} />
+                            </FieldWrapperComponent>
+                        )}
                         {fieldsToRender}
                     </Stack>
                 </Stack>

@@ -15,6 +15,7 @@ const ROUTES = {
 	MEMBERSHIPS_DETAIL: '/memberships-detail',
 	STAFF_LISTING: '/staff',
 	STAFF_CREATE: '/staff-create',
+	STAFF_EDIT: '/staff-edit',
 	STAFF_DETAIL: '/staff-detail',
 	USER_LISTING: '/users',
 	USER_CREATE: '/user-create',

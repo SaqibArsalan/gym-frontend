@@ -11,10 +11,11 @@ import LoaderService from 'services/LoaderService';
 import { IPaginationOption } from 'redux/interfaces';
 import ROUTES from "config/constants";
 import {
-	CREATE_STAFF, GET_STAFF_BY_NAME_LIST,
+	CREATE_STAFF,
+	UPDATE_STAFF,
+	GET_STAFF_BY_NAME_LIST,
 	GET_STAFF_DETAIL,
-	GET_STAFF_LIST
-
+	GET_STAFF_LIST,
 } from '../Staff.constants';
 
 // // Actions
@@ -73,6 +74,22 @@ export const createStaff = (staffCreation: IStaffCreation) => async () => {
 		throwErrorToast(e)
 	}
 }
+
+export const updateStaff = (staffId: string, staffUpdate: Partial<IStaffCreation>) => async () => {
+	const client = new GymHttpClient({ dispatchError: false });
+	try {
+		LoaderService.show();
+		await client.patch<void>(UPDATE_STAFF.replace('staffId', staffId), staffUpdate);
+		LoaderService.hide();
+		throwSuccessToast('Staff Updated');
+		setTimeout(() => {
+			NavigationService.navigate(prepareRouteForNavigation(ROUTES.STAFF_LISTING));
+		}, 1000);
+	} catch (e) {
+		LoaderService.hide();
+		throwErrorToast(e);
+	}
+};
 
 export const fetchStaffByName = (name: string) => async (dispatch: Dispatch<any>) => {
 	const client = new GymHttpClient({ dispatchError: false });

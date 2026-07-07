@@ -6,6 +6,7 @@ import {IUsersDropdown} from "../../../redux/components/User";
 export interface IStaffCreateOrUpdateProps {
 	auth: IAuthInitialState;
 	usersByNameList: IUsersDropdown[];
+	staffDetail: IStaff | null;
 }
 
 export interface ItableColumnsMap {

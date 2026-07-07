@@ -1,11 +1,7 @@
-import {Box, Breadcrumbs, Button, Divider, Grid, Paper, Toolbar, Typography} from "@mui/material";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
-import ROUTES from "config/constants";
-import {IStaffProps} from "../StaffPage/StaffPage.interface";
-import {createStaff, fetchStaffDetail} from "../../../redux/components/Staff/sources";
+import {createStaff, fetchStaffDetail, updateStaff} from "../../../redux/components/Staff/sources";
 import {prepareRouteForNavigation} from "../../../utils/Route";
 import StaffCreateOrUpdateConnector from "./StaffCreateOrUpdateConnector";
 import {IStaffCreateOrUpdateProps, IStep} from "./StaffCreateOrUpdate.interface";
@@ -21,31 +17,43 @@ function StaffCreateOrUpdateComponent(props: IStaffCreateOrUpdateProps) {
     const navigate = useNavigate();
     const params = useParams();
     const [activeStep, setActiveStep] = useState<number>(0);
+    const [isReady, setIsReady] = useState<boolean>(false);
 
-    const { usersByNameList } = props;
+    const { usersByNameList, staffDetail } = props;
+    const isEditMode = Boolean(params.staffId);
 
-    const staffCreationPayload = useRef<IStaffCreation>(
-        {
-            ...emptyStaffCreationPayload,
-        });
+    const staffCreationPayload = useRef<IStaffCreation>({ ...emptyStaffCreationPayload });
+    const hasPopulated = useRef<boolean>(false);
 
-    const onContinue = () => {
-        setActiveStep(activeStep + 1);
-    };
+    // In edit mode: fetch the staff detail and pre-populate the form
+    useEffect(() => {
+        if (isEditMode && params.staffId) {
+            dispatch(fetchStaffDetail(params.staffId));
+        } else {
+            setIsReady(true);
+        }
+    }, []);
 
-    const onBack = () => {
-        setActiveStep(activeStep - 1);
-    };
+    // Once staffDetail is loaded, pre-populate the payload and mark form as ready
+    useEffect(() => {
+        if (isEditMode && staffDetail && !hasPopulated.current) {
+            hasPopulated.current = true;
+            staffCreationPayload.current = {
+                userId: staffDetail.userId,
+                name: staffDetail.name,
+                salary: staffDetail.salary,
+                hireDate: staffDetail.hireDate,
+            };
+            setIsReady(true);
+        }
+    }, [staffDetail]);
 
     const onSubmit = () => {
-        dispatch(createStaff(staffCreationPayload.current));
-        // if (invoiceDetails) {
-        //     dispatch(updateInvoiceDetails(invoiceDetails.id, invoiceCreationPayload.current));
-        //
-        // } else {
-        //     dispatch(createInvoice(invoiceCreationPayload.current));
-        // }
-
+        if (isEditMode && params.staffId) {
+            dispatch(updateStaff(params.staffId, staffCreationPayload.current));
+        } else {
+            dispatch(createStaff(staffCreationPayload.current));
+        }
     };
 
     const steps: IStep[] = [
@@ -56,6 +64,7 @@ function StaffCreateOrUpdateComponent(props: IStaffCreateOrUpdateProps) {
                 activeStep,
                 totalSteps,
                 usersByNameList,
+                isEditMode,
                 continueText: 'Submit',
                 staffCreationPayload: staffCreationPayload.current,
                 onContinue: onSubmit,
@@ -67,13 +76,16 @@ function StaffCreateOrUpdateComponent(props: IStaffCreateOrUpdateProps) {
     const ComponentToRender = selectedStep?.component;
     const componentProps = selectedStep?.componentProps || {};
 
+    const pageTitle = isEditMode ? 'Edit Staff' : 'New Staff';
+    const breadcrumb = isEditMode ? ['Staff', 'Edit Staff'] : ['Staff', 'New Staff'];
+
     return (
         <div className='creation-page'>
             <FormSubHeader
-                title='New Staff'
-                breadCrumbTitles={['Staff', 'New Staff']}
+                title={pageTitle}
+                breadCrumbTitles={breadcrumb}
             />
-            {ComponentToRender ? <ComponentToRender {...componentProps} /> : null}
+            {isReady && ComponentToRender ? <ComponentToRender {...componentProps} /> : null}
         </div>
     );
 }

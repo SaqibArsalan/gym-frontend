@@ -4,7 +4,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import ROUTES from "config/constants";
-import {IStaffProps} from "../StaffPage/StaffPage.interface";
 import {fetchStaffDetail} from "../../../redux/components/Staff/sources";
 import {prepareRouteForNavigation} from "../../../utils/Route";
 import StaffDetailConnector from "./StaffDetailConnector";
@@ -31,6 +30,11 @@ function StaffDetailComponent(props: IStaffDetailProps) {
         };
     }, []);
 
+    const navigateToEdit = () => {
+        const route = prepareRouteForNavigation(ROUTES.STAFF_EDIT);
+        navigate(`${route}/${params.userId}`, { replace: false });
+    };
+
     const StaffDetailSubHeader = ({staffName}: { staffName: string }) => (
         <Paper className="fleet-tour-sub-header" elevation={0} square>
             <Toolbar>
@@ -49,7 +53,7 @@ function StaffDetailComponent(props: IStaffDetailProps) {
                             {staffName.toUpperCase()}
                         </Typography>
                     </Box>
-                    <Button variant="contained" color="primary" onClick={() => console.log("Edit Clicked")}>
+                    <Button variant="contained" color="primary" onClick={navigateToEdit}>
                         Edit
                     </Button>
                 </Box>
@@ -58,9 +62,9 @@ function StaffDetailComponent(props: IStaffDetailProps) {
     );
 
     const StaffBasicInfo = ({ staffInfo }: { staffInfo: any }) => {
-        const {userId, salary, hireDate} = staffInfo;
+        const {name, salary, hireDate} = staffInfo;
         const infoItems = [
-            {title: "User ID", value: userId},
+            {title: "Staff Name", value: name},
             {title: "Salary", value: salary},
             {title: "Hire Date", value: hireDate},
         ];
