@@ -32,7 +32,8 @@ export interface IMembersSubscriptions {
 	joinDate: string;
 	expiryDate: string;
 	membershipPlanName: string;
-	price: number
+	price: number;
+	durationInMonths: number;
 }
 
 export interface IMembershipPlan {

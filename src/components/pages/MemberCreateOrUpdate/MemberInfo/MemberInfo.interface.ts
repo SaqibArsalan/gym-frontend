@@ -13,6 +13,7 @@ export interface IMemberInfoProps extends IStepComponentProps {
 	usersByNameList: IUsersDropdown[];
 	memberCreationPayload: IMemberCreation;
 	membershipPlans: IMembershipPlan[];
+	isEditMode?: boolean;
 }
 
 export interface ItableColumnsMap {

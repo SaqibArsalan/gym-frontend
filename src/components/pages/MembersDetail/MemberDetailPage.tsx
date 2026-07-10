@@ -47,7 +47,7 @@ function MemberDetailComponent(props: IMemberDetailProps) {
                             {memberName.toUpperCase()}
                         </Typography>
                     </Box>
-                    <Button variant="contained" color="primary" onClick={() => console.log("Edit Clicked")}>
+                    <Button variant="contained" color="primary" onClick={() => navigate(`${ROUTES.MEMBER_EDIT}/${params.memberId}`)}>
                         Edit
                     </Button>
                 </Box>

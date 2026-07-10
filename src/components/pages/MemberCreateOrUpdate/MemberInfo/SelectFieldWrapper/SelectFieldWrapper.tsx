@@ -25,7 +25,7 @@ export default function SelectFieldWrapper(props: ISelectFieldWrapperProps) {
 		onChangeTrigger(fieldKey)(value[fieldKey]);
 	};
 
-	const defaultValue = selectedPayload ? selectedPayload.name : null;
+	const defaultValue = selectedPayload ? selectedPayload.id : null;
 
 	return (
 		<div className={styles.dropdownWrapper}>

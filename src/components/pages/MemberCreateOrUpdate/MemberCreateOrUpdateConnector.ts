@@ -9,7 +9,8 @@ import {fetchMembershipPlans} from "../../../redux/components/Members/sources";
 const mapStateToProps = (state: IRootState) => ({
 	auth: state.auth,
 	membershipPlans: state.members.membershipPlans,
-	usersByNameList: state.user.usersByNameList
+	usersByNameList: state.user.usersByNameList,
+	memberDetail: state.members.memberDetails
 });
 
 const MemberCreateOrUpdateConnector = (component: React.ComponentType<any>) =>

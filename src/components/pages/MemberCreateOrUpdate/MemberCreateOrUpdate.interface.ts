@@ -2,12 +2,13 @@ import { IAuthInitialState } from 'redux/components/Auth';
 import React from "react";
 import {IStaff} from "../../../redux/components/Staff";
 import {IUsersDropdown} from "../../../redux/components/User";
-import {IMembershipPlan} from "../../../redux/components/Members";
+import {IMembershipPlan, IMembersSubscriptions} from "../../../redux/components/Members";
 
 export interface IMemberCreateOrUpdateProps {
 	auth: IAuthInitialState;
 	usersByNameList: IUsersDropdown[];
 	membershipPlans: IMembershipPlan[];
+	memberDetail: IMembersSubscriptions;
 }
 
 export interface ItableColumnsMap {

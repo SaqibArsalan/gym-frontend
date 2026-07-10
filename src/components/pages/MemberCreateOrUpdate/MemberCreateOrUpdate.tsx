@@ -1,12 +1,7 @@
-import {Box, Breadcrumbs, Button, Divider, Grid, Paper, Toolbar, Typography} from "@mui/material";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
-import ROUTES from "config/constants";
-import {IStaffProps} from "../StaffPage/StaffPage.interface";
-import {createStaff, fetchStaffDetail} from "../../../redux/components/Staff/sources";
-import {prepareRouteForNavigation} from "../../../utils/Route";
 import MemberCreateOrUpdateConnector from "./MemberCreateOrUpdateConnector";
 import {IMemberCreateOrUpdateProps, IStep} from "./MemberCreateOrUpdate.interface";
 import {totalSteps} from "./MemberCreateOrUpdateHelper";
@@ -14,7 +9,7 @@ import FormSubHeader from "../../shared/FormSubHeader/FormSubHeader";
 import {IMemberCreation} from "./MemberInfo/MemberInfo.interface";
 import {emptyMemberCreationPayload} from "./MemberCreateOrUpdate.constants";
 import MemberInfo from "./MemberInfo/MemberInfo";
-import {createMember} from "../../../redux/components/Members/sources";
+import {createMember, fetchMemberDetail, updateMember} from "../../../redux/components/Members/sources";
 
 
 function MemberCreateOrUpdateComponent(props: IMemberCreateOrUpdateProps) {
@@ -22,13 +17,40 @@ function MemberCreateOrUpdateComponent(props: IMemberCreateOrUpdateProps) {
     const navigate = useNavigate();
     const params = useParams();
     const [activeStep, setActiveStep] = useState<number>(0);
+    const [isReady, setIsReady] = useState<boolean>(false);
 
-    const { usersByNameList, membershipPlans } = props;
+    const { usersByNameList, membershipPlans, memberDetail } = props;
+    const isEditMode = Boolean(params.memberId);
+    const hasPopulated = useRef<boolean>(false);
+
+    // In edit mode: fetch the member detail and pre-populate the form
+    useEffect(() => {
+        if (isEditMode && params.memberId) {
+            dispatch(fetchMemberDetail(params.memberId));
+        } else {
+            setIsReady(true);
+        }
+    }, []);
 
     const memberCreationPayload = useRef<IMemberCreation>(
         {
             ...emptyMemberCreationPayload,
         });
+
+    // Once memberDetail is loaded, pre-populate the payload and mark form as ready
+    useEffect(() => {
+        if (isEditMode && memberDetail && !hasPopulated.current) {
+            hasPopulated.current = true;
+            memberCreationPayload.current = {
+                userId: memberDetail.userId,
+                membershipPlanId: memberDetail.membershipPlanId,
+                memberName: memberDetail.memberName,
+                joinDate: memberDetail.joinDate,
+                durationInMonths: memberDetail.durationInMonths,
+            };
+            setIsReady(true);
+        }
+    }, [memberDetail]);
 
     const onContinue = () => {
         setActiveStep(activeStep + 1);
@@ -39,7 +61,11 @@ function MemberCreateOrUpdateComponent(props: IMemberCreateOrUpdateProps) {
     };
 
     const onSubmit = () => {
-        dispatch(createMember(memberCreationPayload.current));
+        if (isEditMode && params.memberId) {
+            dispatch(updateMember(params.memberId, memberCreationPayload.current));
+        } else {
+            dispatch(createMember(memberCreationPayload.current));
+        }
     };
 
     const steps: IStep[] = [
@@ -51,6 +77,7 @@ function MemberCreateOrUpdateComponent(props: IMemberCreateOrUpdateProps) {
                 totalSteps,
                 usersByNameList,
                 membershipPlans,
+                isEditMode,
                 continueText: 'Submit',
                 memberCreationPayload: memberCreationPayload.current,
                 onContinue: onSubmit,
@@ -65,10 +92,10 @@ function MemberCreateOrUpdateComponent(props: IMemberCreateOrUpdateProps) {
     return (
         <div className='creation-page'>
             <FormSubHeader
-                title='New Member'
-                breadCrumbTitles={['Member', 'New Member']}
+                title={isEditMode ? 'Edit Member' : 'New Member'}
+                breadCrumbTitles={isEditMode ? ['Member', 'Edit Member'] : ['Member', 'New Member']}
             />
-            {ComponentToRender ? <ComponentToRender {...componentProps} /> : null}
+            {isReady && ComponentToRender ? <ComponentToRender {...componentProps} /> : null}
         </div>
     );
 }

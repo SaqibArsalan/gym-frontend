@@ -57,9 +57,10 @@ const RootRoute = (props: { store: Store; mainTheme?: Theme }) => {
 					<Route path={`${ROUTES.MEMBERSHIP_LISTING}`} element={<MembersPage />} />
 					<Route path={`${ROUTES.STAFF_LISTING}`} element={<StaffPage />} />
 					<Route path={`${ROUTES.STAFF_CREATE}`} element={<StaffCreateOrUpdate />} />
-				<Route path={`${ROUTES.STAFF_EDIT}/:staffId`} element={<StaffCreateOrUpdate />} />
-					<Route path={`${ROUTES.MEMBER_CREATE}`} element={<MemberCreateOrUpdate />} />
-					<Route path={`${ROUTES.CLASS_LISTING}`} element={<GymClassPage />} />
+					<Route path={`${ROUTES.STAFF_EDIT}/:staffId`} element={<StaffCreateOrUpdate />} />
+				<Route path={`${ROUTES.MEMBER_CREATE}`} element={<MemberCreateOrUpdate />} />
+				<Route path={`${ROUTES.MEMBER_EDIT}/:memberId`} element={<MemberCreateOrUpdate />} />
+				<Route path={`${ROUTES.CLASS_LISTING}`} element={<GymClassPage />} />
 					<Route path={`${ROUTES.CLASS_CREATE}`} element={<ClassCreateOrUpdate />} />
 				<Route path={`${ROUTES.SESSION_LISTING}`} element={<SessionListingPage />} />
 				<Route path={`${ROUTES.SESSION_CREATE}`} element={<SessionCreateOrUpdate />} />

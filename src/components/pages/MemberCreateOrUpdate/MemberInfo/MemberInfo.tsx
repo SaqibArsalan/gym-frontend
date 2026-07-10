@@ -1,4 +1,4 @@
-import {Box, Breadcrumbs, Button, Divider, Stack, Paper, Toolbar, Typography} from "@mui/material";
+import {Box, Breadcrumbs, Button, Divider, Stack, Paper, TextField, Toolbar, Typography} from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {useNavigate, useParams} from "react-router-dom";
 import React, {useCallback, useEffect, useState} from "react";
@@ -22,7 +22,7 @@ import {IMembershipPlan} from "../../../../redux/components/Members";
 
 
 function MemberInfo(props: IMemberInfoProps) {
-    const {memberCreationPayload, usersByNameList, membershipPlans ,onContinue, ...rest} = props;
+    const {memberCreationPayload, usersByNameList, membershipPlans, onContinue, isEditMode, ...rest} = props;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -70,11 +70,15 @@ function MemberInfo(props: IMemberInfoProps) {
         onSelection: onChange,
     };
 
+    // Find the currently selected plan to pre-populate the dropdown
+    const selectedPlan = membershipPlans.find(p => p.id === memberCreationPayload.membershipPlanId);
+
     const membershipPlanProps: ISelectFieldWrapperProps = {
         label: 'Membership Plan',
         placeholder: 'eg: Monthly',
         fieldKey: FIELD_KEYS.PLAN,
         items: membershipPlans,
+        selectedPayload: selectedPlan,
         onChange
     };
 
@@ -97,9 +101,21 @@ function MemberInfo(props: IMemberInfoProps) {
                     </Box>
                     <Divider />
                     <Stack spacing={5}>
-                        <FieldWrapperComponent heading='User' subHeading='Select User'>
-                            <AutoCompleteComponent {...userProps} />
-                        </FieldWrapperComponent>
+                        {isEditMode ? (
+                            <FieldWrapperComponent heading='User' subHeading='Linked User'>
+                                <TextField
+                                    fullWidth
+                                    disabled
+                                    size='small'
+                                    value={memberCreationPayload.memberName}
+                                    label='Member Name'
+                                />
+                            </FieldWrapperComponent>
+                        ) : (
+                            <FieldWrapperComponent heading='User' subHeading='Select User'>
+                                <AutoCompleteComponent {...userProps} />
+                            </FieldWrapperComponent>
+                        )}
                         <FieldWrapperComponent heading='Plan' subHeading='Select Plan'>
                             <SelectFieldWrapper {...membershipPlanProps} />
                         </FieldWrapperComponent>

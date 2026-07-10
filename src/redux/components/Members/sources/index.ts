@@ -13,15 +13,12 @@ import ROUTES from "config/constants";
 import {
 	CREATE_MEMBERS_SUBSCRIPTIONS,
 	GET_MEMBER_DETAILS,
-	GET_MEMBERS_SUBSCRIPTIONS, GET_MEMBERSHIP_PLANS, GET_MEMBERSHIP_PLANS_DROPDOWN
+	GET_MEMBERS_SUBSCRIPTIONS, GET_MEMBERSHIP_PLANS_DROPDOWN, UPDATE_MEMBERS_SUBSCRIPTIONS
 
 } from '../Members.constants';
 
 // // Actions
 import {actions, IMembershipPlan, IMembersSubscriptions} from '../index';
-import { IWarehouse } from '../Members.interface';
-import {CREATE_STAFF, GET_STAFF_DETAIL, IStaff} from "../../Staff";
-import {IStaffCreation} from "../../../../components/pages/StaffCreateOrUpdate/StaffInfo/StaffInfo.interface";
 import NavigationService from "../../../../services/NavigationService";
 import {prepareRouteForNavigation} from "../../../../utils/Route";
 import {IMemberCreation} from "../../../../components/pages/MemberCreateOrUpdate/MemberInfo/MemberInfo.interface";
@@ -71,6 +68,28 @@ export const createMember = (memberCreation: IMemberCreation) => async () => {
 
 		LoaderService.hide();
 		throwSuccessToast('Member Created');
+
+		setTimeout(() => {
+			LoaderService.hide();
+			NavigationService.navigate(prepareRouteForNavigation(ROUTES.MEMBERSHIP_LISTING));
+		}, 1000);
+
+	} catch (e) {
+		LoaderService.hide();
+		throwErrorToast(e)
+	}
+}
+
+
+export const updateMember = (memberId: string, memberCreation: IMemberCreation) => async () => {
+	const client = new GymHttpClient({ dispatchError: false });
+
+	try {
+		LoaderService.show();
+		await client.patch<void>(UPDATE_MEMBERS_SUBSCRIPTIONS.replace('memberId', memberId), memberCreation);
+
+		LoaderService.hide();
+		throwSuccessToast('Member Updated');
 
 		setTimeout(() => {
 			LoaderService.hide();

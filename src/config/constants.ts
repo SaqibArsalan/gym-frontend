@@ -12,6 +12,7 @@ const ROUTES = {
 	DASHBOARD: '/dashboard',
 	MEMBERSHIP_LISTING: '/memberships',
 	MEMBER_CREATE: '/memberships-create',
+	MEMBER_EDIT: '/member-edit',
 	MEMBERSHIPS_DETAIL: '/memberships-detail',
 	STAFF_LISTING: '/staff',
 	STAFF_CREATE: '/staff-create',
